@@ -1,0 +1,5 @@
+<?
+    function sendVerificationEmail($userEmail, $token){
+        
+    }
+?>
