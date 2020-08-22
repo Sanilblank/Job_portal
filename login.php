@@ -33,7 +33,7 @@ require_once 'controllers/authController.php';
                         <input type="password" name="password" class="form-control form-control-lg">
                     </div>
                     <div class="form-group">
-                        <p class="text-center">Select type of account</p>
+                        <p class="text-center radio">Select type of account</p>
                         <div class="text-center radio">
                             <input type="radio" id="seeker" name="job" value="seeker">
                             <label for="seeker">Job Seeker</label>

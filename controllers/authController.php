@@ -42,7 +42,7 @@ if (isset($_POST['signup-btn'])) {
     $sql = "SELECT * FROM users WHERE email=? LIMIT 1";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header('Location: ../signup.php?error=sqlerror');
+        header('Location: signup.php?error=sqlerror');
         exit();
     } else {
         mysqli_stmt_bind_param($stmt, "s", $email);
@@ -56,6 +56,23 @@ if (isset($_POST['signup-btn'])) {
         }
     }
 
+    $sql = "SELECT * FROM users WHERE username=? LIMIT 1";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header('Location: signup.php?error=sqlerror');
+        exit();
+    } else {
+        mysqli_stmt_bind_param($stmt, "s", $username);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $userCount = mysqli_num_rows($result);
+        mysqli_stmt_close($stmt);
+
+        if ($userCount > 0) {
+            $errors['userexists'] = "User already exists";
+        }
+    }
+
     if (!count($errors)) {
         $password = password_hash($password, PASSWORD_DEFAULT);
         $token = bin2hex(random_bytes(50));
@@ -64,7 +81,7 @@ if (isset($_POST['signup-btn'])) {
         $sql = "INSERT INTO users (username, email, verified, token, password, accounttype) VALUES (?,?,?,?,?,?)";
         $stmt = mysqli_stmt_init($conn);
         if (!mysqli_stmt_prepare($stmt, $sql)) {
-            header('Location: ../signup.php?error=sqlerror');
+            header('Location: signup.php?error=sqlerror');
             exit();
         } else {
             mysqli_stmt_bind_param($stmt, "ssbsss", $username, $email, $verified, $token, $password, $accountType);
@@ -84,5 +101,37 @@ if (isset($_POST['signup-btn'])) {
                 $errors['error'] = "Failed to register";
             }
         }
+    }
+}
+
+//Log in
+if (isset($_POST['login-btn'])) {
+    $username = trim($_POST['username']);
+    $password = trim($_POST['password']);
+
+    if (isset($_POST['accountType'])) {
+        $accountType = trim($_POST['accountType']);
+    }
+
+    if (empty($username)) {
+        $errors['username'] = "Username required";
+    }
+    if (empty($password)) {
+        $errors['password'] = "Password required";
+    }
+    if (empty($accountType)) {
+        $errors['accountType'] = "Please select the type of account";
+    }
+
+    $sql = "SELECT * FROM users WHERE email = ? OR username=? LIMIT 1";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header('Location: login.php?error=sqlerror');
+        exit();
+    } else {
+        mysqli_stmt_bind_param($stmt, "ss", $username, $username);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $user = mysqli_fetch_assoc($result);
     }
 }

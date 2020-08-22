@@ -42,7 +42,7 @@ form p {
 /* The close button */
 .closebtn {
   margin-left: 15px;
-  color: whitesmoke;
+  color: black;
   font-weight: bold;
   float: right;
   font-size: 22px;
@@ -53,5 +53,5 @@ form p {
 
 /* When moving the mouse over the close button */
 .closebtn:hover {
-  color: black;
+  color: white;
 }
