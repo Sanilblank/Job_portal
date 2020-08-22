@@ -29,8 +29,8 @@ require_once 'controllers/authController.php';
                     <?php } ?>
 
                     <div class="form-group">
-                        <label for="username">Username or email</label>
-                        <input type="text" name="username" class="form-control form-control-lg">
+                        <label for="username">Username or Email</label>
+                        <input type="text" name="username" value="<?php echo $username; ?>" class="form-control form-control-lg">
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>

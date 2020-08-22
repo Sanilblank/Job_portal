@@ -135,7 +135,7 @@ if (isset($_POST['login-btn'])) {
                 if (password_verify($password, $user['password'])) {
                     //login user
                     $_SESSION['id'] = $user['id'];
-                    $_SESSION['username'] = $user['user'];
+                    $_SESSION['username'] = $user['username'];
                     $_SESSION['email'] = $user['email'];
                     $_SESSION['verified'] = $user['verified'];
 
@@ -149,4 +149,15 @@ if (isset($_POST['login-btn'])) {
             }
         }
     }
+}
+
+//logout user
+if (isset($_GET['logout'])) {
+    session_destroy();
+    unset($_SESSION['id']);
+    unset($_SESSION['username']);
+    unset($_SESSION['email']);
+    unset($_SESSION['verify']);
+    header('Location: login.php');
+    exit();
 }

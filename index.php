@@ -1,5 +1,12 @@
 <?php
 require_once 'controllers/authController.php';
+
+if (!isset($_SESSION['id'])) {
+    header('Location: login.php');
+    exit();
+}
+
+
 ?>
 <html lang="en">
 
@@ -27,7 +34,7 @@ require_once 'controllers/authController.php';
                 <?php } ?>
                 <h3>Welcome, <?php echo $_SESSION['username']; ?></h3>
 
-                <a href="#" class="logout">logout</a>
+                <a href="index.php?logout=1" class="logout">logout</a>
 
                 <?php if (!$_SESSION['verified']) { ?>
                     <div class="alert alert-warning">
