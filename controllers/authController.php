@@ -94,6 +94,7 @@ if (isset($_POST['signup-btn'])) {
                 $_SESSION['username'] = $username;
                 $_SESSION['email'] = $email;
                 $_SESSION['verified'] = $verified;
+                $_SESSION['accountType'] = $accountType;
 
 
                 sendVerificationEmail($email, $token);
@@ -143,6 +144,7 @@ if (isset($_POST['login-btn'])) {
                     $_SESSION['username'] = $user['username'];
                     $_SESSION['email'] = $user['email'];
                     $_SESSION['verified'] = $user['verified'];
+                    $_SESSION['accountType'] = $user['accounttype'];
 
                     $_SESSION['message'] = "You are now logged in!";
                     $_SESSION['alert-class'] = "alert-success";
