@@ -1,0 +1,49 @@
+/* Import Google fonts */
+@import url("https://fonts.googleapis.com/css2?family=Lora&display=swap");
+
+body {
+  background: rgb(48, 46, 46);
+}
+
+.container {
+  max-width: 1500px;
+}
+
+.form-div {
+  background: whitesmoke;
+  margin: 50px auto 50px;
+  padding: 25px 50px 10px 50px;
+  border: 1px solid #80ced7;
+  border-radius: 5px;
+  font-size: 1.1em;
+  font-family: "Lora&display=swap", serif;
+}
+
+.form-control:focus {
+  box-shadow: none;
+}
+
+form p {
+  font-size: 0.89em;
+}
+
+.radio {
+  font-size: 0.89em;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: whitesmoke;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+}

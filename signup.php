@@ -14,7 +14,12 @@
         <div class="row">
             <div class="col-md-4 offset-md-4 form-div">
                 <form action="signup.php" method="POST">
-                    <h3 class="text-center">Register</h3>
+                    <h2 class="text-center">Register</h2>
+                    <!-- <div class="alert alert-danger">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                        This is an alert box.
+                    </div> -->
+
                     <div class="form-group">
                         <label for="username">Username</label>
                         <input type="text" name="username" class="form-control form-control-lg">
@@ -33,7 +38,7 @@
                     </div>
                     <div class="form-group">
                         <p class="text-center">Select type of account</p>
-                        <div class="text-center">
+                        <div class="text-center radio">
                             <input type="radio" id="seeker" name="job" value="seeker">
                             <label for="seeker">Job Seeker</label>
                             <input type="radio" id="provider" name="job" value="provider">
