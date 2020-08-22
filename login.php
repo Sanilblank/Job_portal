@@ -19,10 +19,14 @@ require_once 'controllers/authController.php';
             <div class="col-md-4 offset-md-4 form-div login">
                 <form action="login.php" method="POST">
                     <h2 class="text-center">Login</h2>
-                    <!-- <div class="alert alert-danger">
-                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                        This is an alert box.
-                    </div> -->
+                    <?php if (count($errors) > 0) { ?>
+                        <div class="alert alert-danger">
+                            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                            <?php foreach ($errors as $error) { ?>
+                                <?php echo $error  . "<br>" ?>
+                            <?php } ?>
+                        </div>
+                    <?php } ?>
 
                     <div class="form-group">
                         <label for="username">Username or email</label>
@@ -31,15 +35,6 @@ require_once 'controllers/authController.php';
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" name="password" class="form-control form-control-lg">
-                    </div>
-                    <div class="form-group">
-                        <p class="text-center radio">Select type of account</p>
-                        <div class="text-center radio">
-                            <input type="radio" id="seeker" name="job" value="seeker">
-                            <label for="seeker">Job Seeker</label>
-                            <input type="radio" id="provider" name="job" value="provider">
-                            <label for="provider">Job Provider</label>
-                        </div>
                     </div>
                     <div class="form-group">
                         <button type="submit" name="login-btn" class="btn btn-primary btn-block btn-lg">Login</button>

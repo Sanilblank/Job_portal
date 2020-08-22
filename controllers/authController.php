@@ -97,6 +97,7 @@ if (isset($_POST['signup-btn'])) {
                 $_SESSION['message'] = "You are now logged in!";
                 $_SESSION['alert-class'] = "alert-success";
                 header('location: index.php');
+                exit();
             } else {
                 $errors['error'] = "Failed to register";
             }
@@ -109,29 +110,43 @@ if (isset($_POST['login-btn'])) {
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
 
-    if (isset($_POST['accountType'])) {
-        $accountType = trim($_POST['accountType']);
-    }
-
     if (empty($username)) {
         $errors['username'] = "Username required";
     }
     if (empty($password)) {
         $errors['password'] = "Password required";
     }
-    if (empty($accountType)) {
-        $errors['accountType'] = "Please select the type of account";
-    }
 
-    $sql = "SELECT * FROM users WHERE email = ? OR username=? LIMIT 1";
-    $stmt = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header('Location: login.php?error=sqlerror');
-        exit();
-    } else {
-        mysqli_stmt_bind_param($stmt, "ss", $username, $username);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
-        $user = mysqli_fetch_assoc($result);
+    if (!count($errors)) {
+        $sql = "SELECT * FROM users WHERE email = ? OR username=? LIMIT 1";
+        $stmt = mysqli_stmt_init($conn);
+        if (!mysqli_stmt_prepare($stmt, $sql)) {
+            header('Location: login.php?error=sqlerror');
+            exit();
+        } else {
+            mysqli_stmt_bind_param($stmt, "ss", $username, $username);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+            $user = mysqli_fetch_assoc($result);
+
+            if (!$user) {
+                $errors['nouser'] = "No such user exists";
+            } else {
+                if (password_verify($password, $user['password'])) {
+                    //login user
+                    $_SESSION['id'] = $user['id'];
+                    $_SESSION['username'] = $user['user'];
+                    $_SESSION['email'] = $user['email'];
+                    $_SESSION['verified'] = $user['verified'];
+
+                    $_SESSION['message'] = "You are now logged in!";
+                    $_SESSION['alert-class'] = "alert-success";
+                    header('location: index.php');
+                    exit();
+                } else {
+                    $errors['login_fail'] = "Wrong credentials";
+                }
+            }
+        }
     }
 }
