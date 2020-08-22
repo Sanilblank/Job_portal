@@ -1,3 +1,7 @@
+<?php
+require_once 'controllers/authController.php';
+?>
+
 <html lang="en">
 
 <head>
@@ -22,11 +26,11 @@
 
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input type="text" name="username" class="form-control form-control-lg">
+                        <input type="text" name="username" value="<?php echo $username; ?>" class="form-control form-control-lg">
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" name="email" class="form-control form-control-lg">
+                        <input type="email" name="email" value="<?php echo $email; ?>" class="form-control form-control-lg">
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
