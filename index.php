@@ -1,6 +1,12 @@
 <?php
 require_once 'controllers/authController.php';
 
+//Verify the user using token
+if (isset($_GET['token'])) {
+    $token = $_GET['token'];
+    verifyUser($token);
+}
+
 if (!isset($_SESSION['id'])) {
     header('Location: login.php');
     exit();
