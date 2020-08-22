@@ -9,7 +9,7 @@ $username = "";
 $email = "";
 $accountType = "";
 
-
+//Sign up
 if (isset($_POST['signup-btn'])) {
     $username = trim($_POST['username']);
     $email = trim($_POST['email']);
