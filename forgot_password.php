@@ -19,6 +19,8 @@ require_once 'controllers/authController.php';
             <div class="col-md-4 offset-md-4 form-div login">
                 <form action="forgot_password.php" method="POST">
                     <h2 class="text-center">Recover your password</h2>
+                    <p>Please enter your email address that you used to sign up on this site
+                        and we will assist you in recovering your password.</p>
                     <?php if (count($errors) > 0) { ?>
                         <div class="alert alert-danger">
                             <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
@@ -29,7 +31,6 @@ require_once 'controllers/authController.php';
                     <?php } ?>
 
                     <div class="form-group">
-                        <label>Email</label>
                         <input type="email" name="email" class="form-control form-control-lg">
                     </div>
                     <div class="form-group">

@@ -197,3 +197,39 @@ function verifyUser($token)
         echo "User not found";
     }
 }
+
+
+//If user clicks on forgot password
+if (isset($_POST['forgot-password'])) {
+    $email = trim($_POST['email']);
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors['email'] = "Email address is invalid";
+    }
+    if (empty($email)) {
+        $errors['email'] = "Email required";
+    }
+
+    if (!count($errors)) {
+        $sql = "SELECT * FROM users WHERE email = ? LIMIT 1";
+        $stmt = mysqli_stmt_init($conn);
+        if (!mysqli_stmt_prepare($stmt, $sql)) {
+            header('Location: forgot_password.php?error=sqlerror');
+            exit();
+        } else {
+            mysqli_stmt_bind_param($stmt, "s", $email);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+            $user = mysqli_fetch_assoc($result);
+
+            if (!$user) {
+                $errors['nouser'] = "No such user exists";
+            } else {
+                $token = $user['token'];
+                sendPasswordResetLink($email, $token);
+                header('Location: password-message.php');
+                exit();
+            }
+        }
+    }
+}
