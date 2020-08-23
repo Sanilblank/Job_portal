@@ -233,3 +233,52 @@ if (isset($_POST['forgot-password'])) {
         }
     }
 }
+
+//If user clicked on reset password button
+if (isset($_POST['reset-password-btn'])) {
+    $password = $_POST['password'];
+    $passwordConf = $_POST['passwordConf'];
+    if (empty($password) ||  empty($passwordConf)) {
+        $errors['password'] = "Password required";
+    }
+    if ($password !== $passwordConf) {
+        $errors['password'] = "The two passwords do not match";
+    }
+
+    $password = password_hash($password, PASSWORD_DEFAULT);
+    $email = $_SESSION['email'];
+    if (!count($errors)) {
+        $sql = "UPDATE users SET password = ? WHERE email = ?";
+        $stmt = mysqli_stmt_init($conn);
+        if (!mysqli_stmt_prepare($stmt, $sql)) {
+            header('Location: reset_password.php?error=sqlerror');
+            exit();
+        } else {
+            mysqli_stmt_bind_param($stmt, "ss", $password, $email);
+            mysqli_stmt_execute($stmt);
+
+            header('Location:login.php?success=reset successful');
+            exit();
+        }
+    }
+}
+
+function resetPassword($token)
+{
+    global $conn;
+    $sql = "SELECT * FROM users WHERE token = ? LIMIT 1";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header('Location: index.php?error=sqlerror');
+        exit();
+    } else {
+        mysqli_stmt_bind_param($stmt, "s", $token);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $user = mysqli_fetch_assoc($result);
+
+        $_SESSION['email'] = $user['email'];
+        header('Location:reset_password.php');
+        exit();
+    }
+}

@@ -69,7 +69,7 @@ function sendPasswordResetLink($userEmail, $token)
       </body>
     </html>';
   // Create a message
-  $message = (new Swift_Message('Verify your email address'))
+  $message = (new Swift_Message('Reset your password'))
     ->setFrom(EMAIL)
     ->setTo($userEmail)
     ->setBody($body, 'text/html');
