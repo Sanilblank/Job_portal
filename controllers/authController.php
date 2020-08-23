@@ -139,6 +139,15 @@ if (isset($_POST['login-btn'])) {
                 $errors['nouser'] = "No such user exists";
             } else {
                 if (password_verify($password, $user['password'])) {
+
+                    if (!empty($_POST['remember'])) {
+                        setcookie("cookie_username", $username, time() + 86400 * 30);
+                        setcookie("cookie_password", $password, time() + 86400 * 30);
+                    } else {
+                        setcookie("cookie_username", "");
+                        setcookie("cookie_password", "");
+                    }
+
                     //login user
                     $_SESSION['id'] = $user['id'];
                     $_SESSION['username'] = $user['username'];
