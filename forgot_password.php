@@ -10,15 +10,15 @@ require_once 'controllers/authController.php';
     <!-- Bootstrap 4 CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
-    <title>Login</title>
+    <title>Forgot Password</title>
 </head>
 
 <body>
     <div class="container">
         <div class="row">
             <div class="col-md-4 offset-md-4 form-div login">
-                <form action="login.php" method="POST">
-                    <h2 class="text-center">Login</h2>
+                <form action="forgot_password.php" method="POST">
+                    <h2 class="text-center">Recover your password</h2>
                     <?php if (count($errors) > 0) { ?>
                         <div class="alert alert-danger">
                             <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
@@ -29,18 +29,12 @@ require_once 'controllers/authController.php';
                     <?php } ?>
 
                     <div class="form-group">
-                        <label for="username">Username or Email</label>
-                        <input type="text" name="username" value="<?php echo $username; ?>" class="form-control form-control-lg">
+                        <label>Email</label>
+                        <input type="email" name="email" class="form-control form-control-lg">
                     </div>
                     <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" name="password" class="form-control form-control-lg">
+                        <button type="submit" name="forgot-password" class="btn btn-primary btn-block btn-lg">Recover your password</button>
                     </div>
-                    <div class="form-group">
-                        <button type="submit" name="login-btn" class="btn btn-primary btn-block btn-lg">Login</button>
-                    </div>
-                    <p class="text-center">Not yet a member? <a href="signup.php">Sign Up</a></p>
-                    <div style="font-size: 0.9em; text-align:center;"><a href="forgot_password.php">Forgot your Password?</a></div>
                 </form>
             </div>
         </div>
