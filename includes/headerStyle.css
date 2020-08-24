@@ -13,7 +13,7 @@ body {
   text-decoration: none;
 }
 
-.sidebar {
+.sidebarOG {
   position: fixed;
   left: -250px;
   width: 250px;
@@ -22,7 +22,7 @@ body {
   transition: all 0.5s ease;
 }
 
-.sidebar header {
+.sidebarOG header {
   font-size: 22px;
   color: whitesmoke;
   text-align: center;
@@ -31,7 +31,7 @@ body {
   user-select: none;
 }
 
-.sidebar ul a {
+.sidebarOG ul a {
   display: block;
   width: 100%;
   line-height: 65px;
@@ -48,23 +48,23 @@ ul li:hover a {
   padding-left: 50px;
 }
 
-.sidebar ul a i {
+.sidebarOG ul a i {
   margin-right: 16px;
 }
 
-#check {
+#checkOG {
   display: none;
 }
 
-label #btn,
-label #cancel {
+label #btnOG,
+label #cancelOG {
   position: absolute;
   cursor: pointer;
   background: black;
   border-radius: 3px;
 }
 
-label #btn {
+label #btnOG {
   left: 40px;
   top: 15px;
   font-size: 30px;
@@ -73,7 +73,7 @@ label #btn {
   transition: all 0.5s ease;
 }
 
-label #cancel {
+label #cancelOG {
   z-index: 1111;
   left: -95px;
   top: 20px;
@@ -83,62 +83,62 @@ label #cancel {
   transition: all 0.5s ease;
 }
 
-#check:checked ~ .sidebar {
+#checkOG:checked ~ .sidebarOG {
   left: 0;
 }
 
-#check:checked ~ label #btn {
+#checkOG:checked ~ label #btnOG {
   left: 250px;
   opacity: 0;
   pointer-events: none;
 }
 
-#check:checked ~ label #cancel {
+#checkOG:checked ~ label #cancelOG {
   left: 195px;
 }
 
-#check:checked ~ section {
+#checkOG:checked ~ section {
   margin-left: 250px;
 }
 
 section {
   background-position: center;
   background-size: cover;
-  height: 100vh;
   transition: all .5s ease;
 }
 
-.actualHeader{
+.actualHeaderOG{
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
+  height: 5px;
   display: flex;
   justify-content: space-between;
-  padding: 35px 200px 35px 0;
+  padding: 30px 200px 35px 0;
   background: black;
 }
 
-.actualHeader ul{
+.actualHeaderOG ul{
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.actualHeader ul li{
+.actualHeaderOG ul li{
   position: absolute;
   list-style: none;
   left: 0;
   margin-left: 1250px;
 }
 
-.actualHeader ul li a{
+.actualHeaderOG ul li a{
   text-decoration: none;
   color: whitesmoke;
   letter-spacing: 2px;
   font-weight: 500px;
-  font-size: 20px;
+  font-size: 21px;
   padding-left: 0;
 }
 

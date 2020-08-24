@@ -10,22 +10,19 @@
 
 <body>
 
-    <header class="actualHeader">
+    <header class="actualHeaderOG">
         <ul>
             <li><a href="#">Logout</a></li>
         </ul>
     </header>
 
 
-
-
-
-    <input type="checkbox" id="check">
-    <label for="check">
-        <i class="fas fa-bars" id="btn"></i>
-        <i class="fas fa-times" id="cancel"></i>
+    <input type="checkbox" id="checkOG">
+    <label for="checkOG">
+        <i class="fas fa-bars" id="btnOG"></i>
+        <i class="fas fa-times" id="cancelOG"></i>
     </label>
-    <div class="sidebar">
+    <div class="sidebarOG">
         <header>My App</header>
         <ul>
             <li><a href="#"><i class="fab fa-accessible-icon"></i>Dashboard</a></li>
