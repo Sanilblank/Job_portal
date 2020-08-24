@@ -9,6 +9,17 @@
 </head>
 
 <body>
+
+    <header class="actualHeader">
+        <ul>
+            <li><a href="#">Logout</a></li>
+        </ul>
+    </header>
+
+
+
+
+
     <input type="checkbox" id="check">
     <label for="check">
         <i class="fas fa-bars" id="btn"></i>
