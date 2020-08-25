@@ -6,6 +6,7 @@ require 'includes/db.php';
 require_once 'emailController.php';
 
 $errors = array();
+$success = array();
 $username = "";
 $email = "";
 $accountType = "";
@@ -292,22 +293,22 @@ function resetPassword($token)
 }
 
 if (isset($_POST['addjob'])) {
+    $username = $_SESSION['username'];
     $recruiter = trim($_POST['recruiter']);
     $title = trim($_POST['title']);
     $salary = trim($_POST['salary']);
     $email = trim($_POST['email']);
     $location = trim($_POST['location']);
     $status = "Pending";
-    $availability = "Open";
     $newfromadmin = 0;
 
-    $sql = "SELECT * FROM jobs WHERE recruiter = ? && title =?";
+    $sql = "SELECT * FROM jobs WHERE recruiter = ? && title =? && username = ?";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         header('Location: jobproviderDashboard.php?error=sqlerror');
         exit();
     } else {
-        mysqli_stmt_bind_param($stmt, "ss", $recruiter, $title);
+        mysqli_stmt_bind_param($stmt, "sss", $recruiter, $title, $username);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
         $userCount = mysqli_num_rows($result);
@@ -318,13 +319,30 @@ if (isset($_POST['addjob'])) {
     }
 
     if (!count($errors)) {
-        $sql = "INSERT INTO jobs (recruiter, title, status, availability, salary, email, location, newfromadmin) VALUES (?,?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO jobs (recruiter, title, status, salary, email, location, newfromadmin, username) VALUES (?,?,?,?,?,?,?,?)";
         if (!mysqli_stmt_prepare($stmt, $sql)) {
             header('Location: jobproviderDashboard.php?error=sqlerror');
             exit();
         } else {
-            mysqli_stmt_bind_param($stmt, "sssssssi", $recruiter, $title, $status, $availability, $salary, $email, $location, $newfromadmin);
+            mysqli_stmt_bind_param($stmt, "ssssssis", $recruiter, $title, $status, $salary, $email, $location, $newfromadmin, $username);
             mysqli_stmt_execute($stmt);
+            $success['jobadded'] = "Job has been added successfully";
         }
+    }
+}
+
+if (isset($_GET['deletejobid'])) {
+    $id = $_GET['deletejobid'];
+
+    $sql = "DELETE FROM jobs WHERE id = ?";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header('Location: jobproviderDashboard.php?error=sqlerror');
+        exit();
+    } else {
+        mysqli_stmt_bind_param($stmt, "i", $id);
+        mysqli_stmt_execute($stmt);
+
+        $success['deletedjob'] = "Job has been deleted successfully";
     }
 }

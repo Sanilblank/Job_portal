@@ -3,7 +3,6 @@ require 'includes/jobprovider_header.php';
 require 'controllers/authController.php';
 ?>
 
-
 <section>
     <div class="container">
         <div class="row">
@@ -13,6 +12,14 @@ require 'controllers/authController.php';
                         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                         <?php foreach ($errors as $error) { ?>
                             <?php echo $error  . "<br>" ?>
+                        <?php } ?>
+                    </div>
+                <?php } ?>
+                <?php if (count($success) > 0) { ?>
+                    <div class="alert alert-success">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                        <?php foreach ($success as $success) { ?>
+                            <?php echo $success  . "<br>" ?>
                         <?php } ?>
                     </div>
                 <?php } ?>
@@ -69,169 +76,78 @@ require 'controllers/authController.php';
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addjobmodel">
                     Add New Job Title
                 </button>
+                <hr>
 
-                <div class="container mb-3 mt-3">
-                    <table class="table table-striped mydatatable" style="width: 100%">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Tiger</td>
-                                <td>King</td>
-                                <td>Tahachal</td>
-                                <td>16</td>
-                                <td>2020/01/01</td>
-                                <td>$40000</td>
-                            </tr>
-                            <tr>
-                                <td>Cat</td>
-                                <td>King</td>
-                                <td>Tahachal</td>
-                                <td>16</td>
-                                <td>2020/01/01</td>
-                                <td>$40000</td>
-                            </tr>
-                            <tr>
-                                <td>Dog</td>
-                                <td>King</td>
-                                <td>Tahachal</td>
-                                <td>16</td>
-                                <td>2020/01/01</td>
-                                <td>$40000</td>
-                            </tr>
-                            <tr>
-                                <td>Panda</td>
-                                <td>King</td>
-                                <td>Tahachal</td>
-                                <td>16</td>
-                                <td>2020/01/01</td>
-                                <td>$40000</td>
-                            </tr>
-                            <tr>
-                                <td>Lion</td>
-                                <td>King</td>
-                                <td>Tahachal</td>
-                                <td>16</td>
-                                <td>2020/01/01</td>
-                                <td>$40000</td>
-                            </tr>
-                            <tr>
-                                <td>Tiger</td>
-                                <td>King</td>
-                                <td>Tahachal</td>
-                                <td>16</td>
-                                <td>2020/01/01</td>
-                                <td>$40000</td>
-                            </tr>
-                            <tr>
-                                <td>Tiger</td>
-                                <td>King</td>
-                                <td>Tahachal</td>
-                                <td>16</td>
-                                <td>2020/01/01</td>
-                                <td>$40000</td>
-                            </tr>
-                            <tr>
-                                <td>Tiger</td>
-                                <td>King</td>
-                                <td>Tahachal</td>
-                                <td>16</td>
-                                <td>2020/01/01</td>
-                                <td>$40000</td>
-                            </tr>
-                            <tr>
-                                <td>Tiger</td>
-                                <td>King</td>
-                                <td>Tahachal</td>
-                                <td>16</td>
-                                <td>2020/01/01</td>
-                                <td>$40000</td>
-                            </tr>
-                            <tr>
-                                <td>Tiger</td>
-                                <td>King</td>
-                                <td>Tahachal</td>
-                                <td>16</td>
-                                <td>2020/01/01</td>
-                                <td>$40000</td>
-                            </tr>
-                            <tr>
-                                <td>Tiger</td>
-                                <td>King</td>
-                                <td>Tahachal</td>
-                                <td>16</td>
-                                <td>2020/01/01</td>
-                                <td>$40000</td>
-                            </tr>
-                            <tr>
-                                <td>Tiger</td>
-                                <td>King</td>
-                                <td>Tahachal</td>
-                                <td>16</td>
-                                <td>2020/01/01</td>
-                                <td>$40000</td>
-                            </tr>
-                            <tr>
-                                <td>Tiger</td>
-                                <td>King</td>
-                                <td>Tahachal</td>
-                                <td>16</td>
-                                <td>2020/01/01</td>
-                                <td>$40000</td>
-                            </tr>
-                            <tr>
-                                <td>Tiger</td>
-                                <td>King</td>
-                                <td>Tahachal</td>
-                                <td>16</td>
-                                <td>2020/01/01</td>
-                                <td>$40000</td>
-                            </tr>
-                            <tr>
-                                <td>Tiger</td>
-                                <td>King</td>
-                                <td>Tahachal</td>
-                                <td>16</td>
-                                <td>2020/01/01</td>
-                                <td>$40000</td>
-                            </tr>
-                            <tr>
-                                <td>Tiger</td>
-                                <td>King</td>
-                                <td>Tahachal</td>
-                                <td>16</td>
-                                <td>2020/01/01</td>
-                                <td>$40000</td>
-                            </tr>
-                            <tr>
-                                <td>Tiger</td>
-                                <td>King</td>
-                                <td>Tahachal</td>
-                                <td>16</td>
-                                <td>2020/01/01</td>
-                                <td>$40000</td>
-                            </tr>
+                <?php
+                $username = $_SESSION['username'];
+                $sql = "SELECT * FROM jobs WHERE username = ?";
+                $stmt = mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($stmt, $sql)) {
+                    header('Location: jobproviderDashboard.php?error=sqlerror');
+                    exit();
+                } else {
+                    mysqli_stmt_bind_param($stmt, "s", $username);
+                    mysqli_stmt_execute($stmt);
+                    mysqli_stmt_store_result($stmt);
+                    $rowCount = mysqli_stmt_num_rows($stmt);
+                    $result = mysqli_stmt_get_result($stmt);
+                    if ($rowCount == 0) { ?>
+                        <div class="col-md-11 offset-md-4" divTable>
+                            <h2 class="nodataheading">No jobs have been added by you.</h2>
+                            <h3 class="nodataheading">Please add a new job title.</h3>
+                        </div>
+                    <?php } else {
 
-                        </tbody>
-                        <tfoot>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
+                        $sql = "SELECT * FROM jobs WHERE username = ?";
+                        $stmt = mysqli_stmt_init($conn);
+                        if (!mysqli_stmt_prepare($stmt, $sql)) {
+                            header('Location: jobproviderDashboard.php?error=sqlerror');
+                            exit();
+                        } else {
+                            mysqli_stmt_bind_param($stmt, "s", $username);
+                            mysqli_stmt_execute($stmt);
+                            $result = mysqli_stmt_get_result($stmt);
+                        }
+                    ?>
+
+                        <div class="container mb-3 mt-3">
+                            <table class="table table-striped table-bordered mydatatable" style="width: 100%">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>S.N.</th>
+                                        <th>Recruiter</th>
+                                        <th>Title</th>
+                                        <th>Status</th>
+                                        <th>Salary</th>
+                                        <th>Location</th>
+                                        <th colspan="2">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    while ($user = mysqli_fetch_assoc($result)) {  ?>
+                                        <tr>
+                                            <td><?php echo $user['id']; ?></td>
+                                            <td><?php echo $user['recruiter']; ?></td>
+                                            <td><?php echo $user['title']; ?></td>
+                                            <td><?php echo $user['status']; ?></td>
+                                            <td><?php echo $user['salary']; ?></td>
+                                            <td><?php echo $user['location']; ?></td>
+                                            <td>
+                                                <a href="applications.php?job_id=<?php echo $user['id']; ?>" class="btn btn-info">Applications</a>
+                                                <a href="jobProviderDashboard.php?deletejobid=<?php echo $user['id']; ?>" class="btn btn-danger">Delete</a>
+                                            </td>
+                                        </tr>
+                                    <?php }
+
+                                    ?>
+                                </tbody>
+
+                            </table>
+                        </div>
+                <?php  }
+                }
+                ?>
             </div>
         </div>
     </div>

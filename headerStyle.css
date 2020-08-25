@@ -163,6 +163,13 @@ section {
   color: white;
 }
 
+.nodataheading{
+  text-align: center;
+  margin-left: -500px;
+  margin-bottom: 50px;
+  margin-top: 40px;
+}
+
 /* The close button */
 .closebtn {
   margin-left: 15px;
@@ -180,6 +187,13 @@ section {
   color: white;
 }
 
+table th{
+  text-align: center;
+}
+
+table td{
+  text-align: center;
+}
 
 
 
