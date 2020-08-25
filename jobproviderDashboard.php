@@ -8,6 +8,15 @@ require 'controllers/authController.php';
     <div class="container">
         <div class="row">
             <div class="col-md-11 offset-md-4 heading">
+                <?php if (count($errors) > 0) { ?>
+                    <div class="alert alert-danger">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                        <?php foreach ($errors as $error) { ?>
+                            <?php echo $error  . "<br>" ?>
+                        <?php } ?>
+                    </div>
+                <?php } ?>
+
                 <h2 class="h2heading">Datatable containing all your advertised jobs</h2>
             </div>
             <div class="col-md-11 offset-md-4 divTable">
@@ -17,18 +26,41 @@ require 'controllers/authController.php';
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <h3 class="modal-title" id="exampleModalLabel">Add New Job Title</h3>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="modal-body">
-                                ...
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
+                            <form action="jobproviderDashboard.php" method="POST">
+                                <div class="modal-body">
+                                    <!-- To be displayed in modal -->
+
+                                    <div class="form-group">
+                                        <label for="recruiter">Recruiter or Company Name</label>
+                                        <input type="text" name="recruiter" class="form-control" placeholder="Enter Name of Recruiter or Company" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="title">Job Title</label>
+                                        <input type="text" name="title" class="form-control" placeholder="Enter Title of Job" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="salary">Salary</label>
+                                        <input type="text" name="salary" class="form-control" placeholder="Enter Salary" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" name="email" class="form-control" placeholder="Enter Email" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="location">Location</label>
+                                        <input type="text" name="location" class="form-control" placeholder="Enter Location" required>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" name="addjob" class="btn btn-primary">Save Data</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
