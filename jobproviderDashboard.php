@@ -11,6 +11,33 @@ require 'controllers/authController.php';
                 <h2 class="h2heading">Datatable containing all your advertised jobs</h2>
             </div>
             <div class="col-md-11 offset-md-4 divTable">
+
+                <!-- Modal -->
+                <div class="modal fade" id="addjobmodel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                ...
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal end -->
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addjobmodel">
+                    Add New Job Title
+                </button>
+
                 <div class="container mb-3 mt-3">
                     <table class="table table-striped mydatatable" style="width: 100%">
                         <thead class="thead-dark">
