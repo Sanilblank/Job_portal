@@ -153,6 +153,17 @@ section {
   font-family: "Lora&display=swap", serif;
 }
 
+.heading{
+  margin: 90px 30px -100px 30px;
+  padding: 0; 
+}
+
+.h2heading{
+  text-align: center;
+  color: white;
+}
+
+
 
 
 

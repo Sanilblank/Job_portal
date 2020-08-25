@@ -178,7 +178,6 @@ if (isset($_GET['logout'])) {
     exit();
 }
 
-
 //Verify user by token
 function verifyUser($token)
 {

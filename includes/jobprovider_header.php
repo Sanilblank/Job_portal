@@ -42,4 +42,3 @@
             <li><a href="#"><i class="fab fa-accessible-icon"></i>Contact</a></li>
         </ul>
     </div>
-    <section></section>

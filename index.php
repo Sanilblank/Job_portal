@@ -58,7 +58,23 @@ if (!isset($_SESSION['id'])) {
                 <?php  } ?>
 
                 <?php if ($_SESSION['verified']) { ?>
-                    <button class="btn btn-block btn-lg btn-primary">I am verified!</button>
+                    <!--<button type="submit" class="btn btn-block btn-lg btn-primary" name="imverified">I am verified!</button> -->
+                    <?php
+                    $accountType = $_SESSION['accountType'];
+                    if ($accountType == "provider") {
+                        header('Location: jobproviderDashboard.php');
+                        exit();
+                    } elseif ($accountType == "seeker") {
+                        header('Location: jobseekerDashboard.php');
+                        exit();
+                    } else {
+                        header('Location: adminDashboard.php');
+                        exit();
+                    }
+                    ?>
+
+
+
                 <?php } ?>
             </div>
         </div>
