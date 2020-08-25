@@ -331,9 +331,8 @@ if (isset($_POST['addjob'])) {
     }
 }
 
-if (isset($_GET['deletejobid'])) {
+if (isset($_GET['deletejob'])) {
     $id = $_GET['deletejobid'];
-
     $sql = "DELETE FROM jobs WHERE id = ?";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {

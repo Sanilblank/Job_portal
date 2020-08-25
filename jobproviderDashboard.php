@@ -130,12 +130,49 @@ require 'controllers/authController.php';
                                             <td><?php echo $user['id']; ?></td>
                                             <td><?php echo $user['recruiter']; ?></td>
                                             <td><?php echo $user['title']; ?></td>
-                                            <td><?php echo $user['status']; ?></td>
+                                            <td><?php
+
+                                                if ($user['status'] == "Pending") { ?>
+                                                    <button type="button" class="btn btn-warning">Pending</button>
+                                                <?php } elseif ($user['status'] == "Approved") { ?>
+                                                    <button type="button" class="btn btn-success">Approved</button>
+                                                <?php } else { ?>
+                                                    <button type="button" class="btn btn-danger">Rejected</button>
+                                                <?php  }
+                                                ?>
+                                            </td>
                                             <td><?php echo $user['salary']; ?></td>
                                             <td><?php echo $user['location']; ?></td>
                                             <td>
                                                 <a href="applications.php?job_id=<?php echo $user['id']; ?>" class="btn btn-info">Applications</a>
-                                                <a href="jobProviderDashboard.php?deletejobid=<?php echo $user['id']; ?>" class="btn btn-danger">Delete</a>
+                                                <!-- Button trigger modal -->
+                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deletejobmodal">
+                                                    Delete
+                                                </button>
+
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="deletejobmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title" id="exampleModalLabel">Delete</h4>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <form action="jobproviderDashboard.php" method="GET">
+                                                                <div class="modal-body">
+                                                                    <h5>Are you sure you want to delete the job?</h5>
+                                                                    <input type="hidden" name="deletejobid" value="<?php echo $user['id']; ?>">
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" name="deletejob" value="Delete" class="btn btn-danger">Yes</button>
+                                                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                     <?php }
