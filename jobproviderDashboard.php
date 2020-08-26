@@ -2,6 +2,9 @@
 require 'includes/jobprovider_header.php';
 require 'controllers/authController.php';
 ?>
+<?php
+$i = 1;
+?>
 
 <section>
     <div class="container">
@@ -131,7 +134,8 @@ require 'controllers/authController.php';
                                     <?php
                                     while ($user = mysqli_fetch_assoc($result)) {  ?>
                                         <tr>
-                                            <td><?php echo $user['id']; ?></td>
+                                            <td><?php echo $i;
+                                                $i++;  ?></td>
                                             <td><?php echo $user['recruiter']; ?></td>
                                             <td><?php echo $user['title']; ?></td>
                                             <td><?php
