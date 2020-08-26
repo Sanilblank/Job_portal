@@ -97,7 +97,7 @@ $i = 1;
                                                 <a href="adminJobs.php?approveid=<?php echo $user['id']; ?>" class="btn btn-success">Approve</a>
                                             </td>
                                             <td>
-                                                <a href="adminJobs.php?rejectid=<?php echo $user['id']; ?>" class="btn btn-danger">Reject</a>
+                                                <a href="adminJobs.php?rejectid=<?php echo $user['id']; ?>" class="btn btn-danger" style="margin-left: -30px;">Reject</a>
                                             </td>
 
 

@@ -353,32 +353,31 @@ if (isset($_GET['deletejob'])) {
 if (isset($_GET['approveid'])) {
     $id = $_GET['approveid'];
     $status = "Approved";
-    $sql = "UPDATE jobs SET status = ? WHERE id = ?";
+    $newfromadmin = 1;
+    $sql = "UPDATE jobs SET status = ?, newfromadmin = ? WHERE id = ?";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         header('Location: adminJobs.php?error=sqlerror');
         exit();
     } else {
-        mysqli_stmt_bind_param($stmt, "si", $status, $id);
+        mysqli_stmt_bind_param($stmt, "sii", $status, $newfromadmin, $id);
         mysqli_stmt_execute($stmt);
 
         $success['jobApproved'] = "Job post has been approved successfully";
-
-        header('Location:adminJobs.php?success=Approved');
-        exit();
     }
 }
 
 if (isset($_GET['rejectid'])) {
     $id = $_GET['rejectid'];
     $status = "Rejected";
-    $sql = "UPDATE jobs SET status = ? WHERE id = ?";
+    $newfromadmin = 1;
+    $sql = "UPDATE jobs SET status = ?, newfromadmin = ? WHERE id = ?";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         header('Location: adminJobs.php?error=sqlerror');
         exit();
     } else {
-        mysqli_stmt_bind_param($stmt, "si", $status, $id);
+        mysqli_stmt_bind_param($stmt, "sii", $status, $newfromadmin, $id);
         mysqli_stmt_execute($stmt);
 
         $errors['jobRejected'] = "Job post has been rejected";

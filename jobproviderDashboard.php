@@ -141,11 +141,11 @@ $i = 1;
                                             <td><?php
 
                                                 if ($user['status'] == "Pending") { ?>
-                                                    <button type="button" class="btn btn-warning">Pending</button>
+                                                    <button type="button" class="btn btn-warning" style="width: 90px;">Pending</button>
                                                 <?php } elseif ($user['status'] == "Approved") { ?>
-                                                    <button type="button" class="btn btn-success">Approved</button>
+                                                    <button type="button" class="btn btn-success" style="width: 90px;">Approved</button>
                                                 <?php } else { ?>
-                                                    <button type="button" class="btn btn-danger">Rejected</button>
+                                                    <button type="button" class="btn btn-danger" style="width: 90px;">Rejected</button>
                                                 <?php  }
                                                 ?>
                                             </td>
