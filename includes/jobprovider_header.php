@@ -34,7 +34,7 @@
         <header>Jobs</header>
         <ul>
             <li><a href="jobproviderDashboard.php"><i class="fab fa-windows"></i>Dashboard</a></li>
-            <li><a href="#"><i class="fas fa-envelope"></i>Messages</a></li>
+            <li><a href="jobproviderMessages.php"><i class="fas fa-envelope"></i>Messages</a></li>
 
         </ul>
     </div>

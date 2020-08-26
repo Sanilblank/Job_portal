@@ -102,6 +102,8 @@ label #cancelOG {
   margin-left: 250px;
 }
 
+
+
 section {
   background-position: center;
   background-size: cover;
@@ -194,6 +196,75 @@ table th{
 table td{
   text-align: center;
 }
+
+.h2head{
+  margin-left: -50px;
+}
+
+
+
+#checkOGa {
+  display: none;
+}
+
+label #btnOGa,
+label #cancelOGa {
+  position: absolute;
+  cursor: pointer;
+  background: black;
+  border-radius: 3px;
+}
+
+label #btnOGa {
+  left: 49%;
+  font-size: 30px;
+  color: whitesmoke;
+  padding: 6px 12px;
+  transition: all 0.5s ease;
+  background: none;
+}
+
+label #cancelOGa {
+  left: 42%;
+  font-size: 30px;
+  color: whitesmoke;
+  padding: 6px 12px;
+  transition: all 0.5s ease;
+  background: none;
+}
+
+.messages{
+  margin-top: 55px;
+  transition: all 0.5s ease;
+}
+
+.messageTable1 {
+  background: whitesmoke;
+  margin: 30px auto 30px;
+  padding: 25px 50px 10px 50px;
+  border: 1px solid #80ced7;
+  border-radius: 5px;
+  font-size: 1.1em;
+  font-family: "Lora&display=swap", serif;
+}
+
+.messages2{
+  margin-left: -50000px;
+  margin-top: -135px;
+  transition: all 0.5s ease;
+
+}
+
+#checkOGa:checked ~ .messages {
+  margin-left: -50000px;
+}
+
+#checkOGa:checked ~ .messages2{
+  margin-left: 0;
+  margin-top: -135px;
+}
+
+
 
 
 
