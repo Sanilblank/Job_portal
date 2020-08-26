@@ -33,7 +33,7 @@
     <div class="sidebarOG">
         <header>Jobs</header>
         <ul>
-            <li><a href="#"><i class="fab fa-accessible-icon"></i>Dashboard</a></li>
+            <li><a href="jobproviderDashboard.php"><i class="fab fa-windows"></i>Dashboard</a></li>
             <li><a href="#"><i class="fab fa-accessible-icon"></i>Shortcuts</a></li>
             <li><a href="#"><i class="fab fa-accessible-icon"></i>Overview</a></li>
             <li><a href="#"><i class="fab fa-accessible-icon"></i>Events</a></li>

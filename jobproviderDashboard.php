@@ -111,7 +111,7 @@ require 'controllers/authController.php';
                     ?>
 
                         <div class="container mb-3 mt-3">
-                            <table class="table table-striped table-bordered mydatatable" style="width: 100%">
+                            <table class="table table-striped mydatatable" style="width: 100%">
                                 <thead class="thead-dark">
                                     <tr>
                                         <th>S.N.</th>
@@ -120,7 +120,11 @@ require 'controllers/authController.php';
                                         <th>Status</th>
                                         <th>Salary</th>
                                         <th>Location</th>
-                                        <th colspan="2">Action</th>
+                                        <th class="no-sort"></th>
+                                        <th></th>
+
+
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -145,8 +149,10 @@ require 'controllers/authController.php';
                                             <td><?php echo $user['location']; ?></td>
                                             <td>
                                                 <a href="applications.php?job_id=<?php echo $user['id']; ?>" class="btn btn-info">Applications</a>
-                                                <!-- Button trigger modal -->
-                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deletejobmodal">
+                                            </td>
+                                            <!-- Button trigger modal -->
+                                            <td>
+                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deletejobmodal" data-book-id="<?php echo $user['id']; ?>" data-book-user="<?php echo $user['recruiter']; ?>">
                                                     Delete
                                                 </button>
 
@@ -163,7 +169,7 @@ require 'controllers/authController.php';
                                                             <form action="jobproviderDashboard.php" method="GET">
                                                                 <div class="modal-body">
                                                                     <h5>Are you sure you want to delete the job?</h5>
-                                                                    <input type="hidden" name="deletejobid" value="<?php echo $user['id']; ?>">
+                                                                    <input type="hidden" name="bookId" value="">
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="submit" name="deletejob" value="Delete" class="btn btn-danger">Yes</button>
@@ -191,7 +197,22 @@ require 'controllers/authController.php';
 </section>
 
 <script>
-    $('.mydatatable').DataTable();
+    $('.mydatatable').DataTable({
+        "columnDefs": [{
+            "orderable": false,
+            "targets": 6
+        }]
+    });
+</script>
+<script>
+    $('#deletejobmodal').on('show.bs.modal', function(e) {
+
+        //get data-id attribute of the clicked element
+        var bookId = $(e.relatedTarget).data('book-id');
+
+        //populate the textbox
+        $(e.currentTarget).find('input[name="bookId"]').val(bookId);
+    });
 </script>
 
 

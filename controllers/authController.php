@@ -332,7 +332,7 @@ if (isset($_POST['addjob'])) {
 }
 
 if (isset($_GET['deletejob'])) {
-    $id = $_GET['deletejobid'];
+    $id = $_GET['bookId'];
     $sql = "DELETE FROM jobs WHERE id = ?";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
