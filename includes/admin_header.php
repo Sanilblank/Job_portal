@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Job Provider</title>
+    <title>Admin</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="headerStyle.css">
@@ -33,8 +33,8 @@
     <div class="sidebarOG">
         <header>Jobs</header>
         <ul>
-            <li><a href="jobproviderDashboard.php"><i class="fab fa-windows"></i>Dashboard</a></li>
-            <li><a href="#"><i class="fas fa-envelope"></i>Messages</a></li>
+            <li><a href="adminDashboard.php"><i class="fab fa-windows"></i>Dashboard</a></li>
+            <li><a href="adminJobs.php"><i class="fab fa-accusoft"></i>Jobs</a></li>
 
         </ul>
     </div>

@@ -156,7 +156,7 @@ $i = 1;
                                             </td>
                                             <!-- Button trigger modal -->
                                             <td>
-                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deletejobmodal" data-book-id="<?php echo $user['id']; ?>" data-book-user="<?php echo $user['recruiter']; ?>">
+                                                <button type="button" class="btn btn-danger" style="margin-left: -30px;" data-toggle="modal" data-target="#deletejobmodal" data-book-id="<?php echo $user['id']; ?>" data-book-user="<?php echo $user['recruiter']; ?>">
                                                     Delete
                                                 </button>
 
