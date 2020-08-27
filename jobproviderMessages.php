@@ -53,9 +53,12 @@ $i = 1;
                             mysqli_stmt_store_result($stmt);
                             $rowCount = mysqli_stmt_num_rows($stmt);
                             if ($rowCount == 0) { ?>
-                                <h2 class="h2heading">No messages from admin yet</h2>
+                                <div class="col-md-11 offset-md-4" divTable>
+                                    <h2 class="nodataheading">No messages from admin yet.</h2>
 
-                        <?php } else {
+                                </div>
+
+                            <?php } else {
                                 $sql = "SELECT * FROM jobs WHERE username = ? && newfromadmin <> ? ORDER BY id desc";
                                 $stmt = mysqli_stmt_init($conn);
                                 if (!mysqli_stmt_prepare($stmt, $sql)) {
@@ -66,59 +69,60 @@ $i = 1;
                                     mysqli_stmt_execute($stmt);
                                     $result = mysqli_stmt_get_result($stmt);
                                 }
-                            }
-                        }
-                        ?>
-                        <table class="table" style="border-radius: 20px; overflow:hidden;">
-                            <tbody>
-                                <?php
-                                while ($user = mysqli_fetch_assoc($result)) {
-                                    if ($user['newfromadmin'] == 1) { ?>
-                                        <tr class='clickable-row' data-href='jobproviderMessagesDisplay.php?readjobstatus=<?php echo $user['status']; ?>&&readjobid=<?php echo $user['id']; ?>'>
 
-                                            <td style="width: 35%; font-size: 23px; border-bottom: 1px solid; text-align: left; padding: 20px 20px; background: rgb(185, 181, 181);">Admin <button class="btn btn-danger" style="border-radius: 15px; width: 60px; padding: 0;">New</button></td>
-                                            <?php
-                                            if ($user['status'] == "Approved") { ?>
-                                                <td style="font-size: 23px; border-bottom: 1px solid; text-align: left; padding: 20px 20px; background: rgb(185, 181, 181);">Your job post has been approved.</td>
+                            ?>
+                                <table class="table" style="border-radius: 20px; overflow:hidden;">
+                                    <tbody>
+                                        <?php
+                                        while ($user = mysqli_fetch_assoc($result)) {
+                                            if ($user['newfromadmin'] == 1) { ?>
+                                                <tr class='clickable-row' data-href='jobproviderMessagesDisplay.php?readjobstatus=<?php echo $user['status']; ?>&&readjobid=<?php echo $user['id']; ?>'>
 
-                                            <?php  } else { ?>
-                                                <td style="font-size: 23px; border-bottom: 1px solid; text-align: left; padding: 20px 20px; background: rgb(185, 181, 181);">Your job post has been rejected.</td>
+                                                    <td style="width: 35%; font-size: 23px; border-bottom: 1px solid; text-align: left; padding: 20px 20px; background: rgb(185, 181, 181);">Admin <button class="btn btn-danger" style="border-radius: 15px; width: 60px; padding: 0;">New</button></td>
+                                                    <?php
+                                                    if ($user['status'] == "Approved") { ?>
+                                                        <td style="font-size: 23px; border-bottom: 1px solid; text-align: left; padding: 20px 20px; background: rgb(185, 181, 181);">Your job post has been approved.</td>
 
+                                                    <?php  } else { ?>
+                                                        <td style="font-size: 23px; border-bottom: 1px solid; text-align: left; padding: 20px 20px; background: rgb(185, 181, 181);">Your job post has been rejected.</td>
+
+
+                                                    <?php }
+                                                    ?>
+                                                </tr>
+
+                                            <?php } else { ?>
+
+                                                <tr class='clickable-row' data-href='jobproviderMessagesDisplay.php?readjobstatus=<?php echo $user['status']; ?>&&readjobid=<?php echo $user['id']; ?>'>
+
+                                                    <td style="width: 35%; font-size: 23px; border-bottom: 1px solid; text-align: left; padding: 20px 20px; background: whitesmoke;">Admin</td>
+                                                    <?php
+                                                    if ($user['status'] == "Approved") { ?>
+                                                        <td style="font-size: 23px; border-bottom: 1px solid; text-align: left; padding: 20px 20px; background: whitesmoke;">Your job post has been approved.</td>
+
+                                                    <?php  } else { ?>
+                                                        <td style="font-size: 23px; border-bottom: 1px solid; text-align: left; padding: 20px 20px; background: whitesmoke;">Your job post has been rejected.</td>
+
+
+                                                    <?php }
+                                                    ?>
+                                                </tr>
 
                                             <?php }
+
+
+
                                             ?>
-                                        </tr>
-
-                                    <?php } else { ?>
-
-                                        <tr class='clickable-row' data-href='jobproviderMessagesDisplay.php?readjobstatus=<?php echo $user['status']; ?>&&readjobid=<?php echo $user['id']; ?>'>
-
-                                            <td style="width: 35%; font-size: 23px; border-bottom: 1px solid; text-align: left; padding: 20px 20px; background: whitesmoke;">Admin</td>
-                                            <?php
-                                            if ($user['status'] == "Approved") { ?>
-                                                <td style="font-size: 23px; border-bottom: 1px solid; text-align: left; padding: 20px 20px; background: whitesmoke;">Your job post has been approved.</td>
-
-                                            <?php  } else { ?>
-                                                <td style="font-size: 23px; border-bottom: 1px solid; text-align: left; padding: 20px 20px; background: whitesmoke;">Your job post has been rejected.</td>
-
-
-                                            <?php }
-                                            ?>
-                                        </tr>
-
-                                    <?php }
-
-
-
-                                    ?>
 
 
                                 <?php }
+                                    }
+                                }
                                 ?>
 
 
-                            </tbody>
-                        </table>
+                                    </tbody>
+                                </table>
 
                     </div>
                 </div>
