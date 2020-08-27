@@ -270,6 +270,14 @@ label #cancelOGa {
   cursor: pointer; 
 }
 
+.card{
+  display: inline-block;
+  background: none;
+  border: none;
+  text-align: center;
+  margin: 10px 5px;
+}
+
 
 
 
