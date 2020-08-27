@@ -260,9 +260,16 @@ label #cancelOGa {
 }
 
 #checkOGa:checked ~ .messages2{
+  position: fixed;
   margin-left: 0;
-  margin-top: -135px;
+  top: 48%;
+  width: 1080px;
 }
+
+[data-href] {
+  cursor: pointer; 
+}
+
 
 
 

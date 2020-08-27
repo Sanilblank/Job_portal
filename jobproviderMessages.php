@@ -35,7 +35,90 @@ $i = 1;
                 </label>
                 <div class="messages">
                     <h2 class="h2heading">Messages from Admin will appear here</h2>
-                    <div class="col-md-11 offset-md-4 messageTable1">
+                    <div class="col-md-11 offset-md-4 messageTable1" style="background: white;">
+
+                        <?php
+                        //For new messages from admin
+
+                        $username = $_SESSION['username'];
+                        $newfromadmin = 0;
+                        $sql = "SELECT * FROM jobs WHERE username = ? && newfromadmin <> ? ";
+                        $stmt = mysqli_stmt_init($conn);
+                        if (!mysqli_stmt_prepare($stmt, $sql)) {
+                            header('Location: jobproviderMessages.php?error=sqlerror');
+                            exit();
+                        } else {
+                            mysqli_stmt_bind_param($stmt, "si", $username, $newfromadmin);
+                            mysqli_stmt_execute($stmt);
+                            mysqli_stmt_store_result($stmt);
+                            $rowCount = mysqli_stmt_num_rows($stmt);
+                            if ($rowCount == 0) { ?>
+                                <h2 class="h2heading">No messages from admin yet</h2>
+
+                        <?php } else {
+                                $sql = "SELECT * FROM jobs WHERE username = ? && newfromadmin <> ? ORDER BY id desc";
+                                $stmt = mysqli_stmt_init($conn);
+                                if (!mysqli_stmt_prepare($stmt, $sql)) {
+                                    header('Location: jobproviderMessages.php?error=sqlerror');
+                                    exit();
+                                } else {
+                                    mysqli_stmt_bind_param($stmt, "si", $username, $newfromadmin);
+                                    mysqli_stmt_execute($stmt);
+                                    $result = mysqli_stmt_get_result($stmt);
+                                }
+                            }
+                        }
+                        ?>
+                        <table class="table" style="border-radius: 20px; overflow:hidden;">
+                            <tbody>
+                                <?php
+                                while ($user = mysqli_fetch_assoc($result)) {
+                                    if ($user['newfromadmin'] == 1) { ?>
+                                        <tr class='clickable-row' data-href='jobproviderMessagesDisplay.php?readjobstatus=<?php echo $user['status']; ?>&&readjobid=<?php echo $user['id']; ?>'>
+
+                                            <td style="width: 35%; font-size: 23px; border-bottom: 1px solid; text-align: left; padding: 20px 20px; background: rgb(185, 181, 181);">Admin <button class="btn btn-danger" style="border-radius: 15px; width: 60px; padding: 0;">New</button></td>
+                                            <?php
+                                            if ($user['status'] == "Approved") { ?>
+                                                <td style="font-size: 23px; border-bottom: 1px solid; text-align: left; padding: 20px 20px; background: rgb(185, 181, 181);">Your job post has been approved.</td>
+
+                                            <?php  } else { ?>
+                                                <td style="font-size: 23px; border-bottom: 1px solid; text-align: left; padding: 20px 20px; background: rgb(185, 181, 181);">Your job post has been rejected.</td>
+
+
+                                            <?php }
+                                            ?>
+                                        </tr>
+
+                                    <?php } else { ?>
+
+                                        <tr class='clickable-row' data-href='jobproviderMessagesDisplay.php?readjobstatus=<?php echo $user['status']; ?>&&readjobid=<?php echo $user['id']; ?>'>
+
+                                            <td style="width: 35%; font-size: 23px; border-bottom: 1px solid; text-align: left; padding: 20px 20px; background: whitesmoke;">Admin</td>
+                                            <?php
+                                            if ($user['status'] == "Approved") { ?>
+                                                <td style="font-size: 23px; border-bottom: 1px solid; text-align: left; padding: 20px 20px; background: whitesmoke;">Your job post has been approved.</td>
+
+                                            <?php  } else { ?>
+                                                <td style="font-size: 23px; border-bottom: 1px solid; text-align: left; padding: 20px 20px; background: whitesmoke;">Your job post has been rejected.</td>
+
+
+                                            <?php }
+                                            ?>
+                                        </tr>
+
+                                    <?php }
+
+
+
+                                    ?>
+
+
+                                <?php }
+                                ?>
+
+
+                            </tbody>
+                        </table>
 
                     </div>
                 </div>
@@ -43,6 +126,9 @@ $i = 1;
                 <div class="messages2">
                     <h2 class="h2heading">Messages from Users will appear here</h2>
                     <div class="col-md-11 offset-md-4 messageTable1">
+
+
+
 
                     </div>
                 </div>
@@ -55,6 +141,23 @@ $i = 1;
 </section>
 
 
+<script>
+    jQuery(document).ready(function($) {
+        $(".clickable-row").click(function() {
+            window.location = $(this).data("href");
+        });
+    });
+</script>
+<script>
+    $('#newfromadmin1Modal').on('show.bs.modal', function(e) {
+
+        //get data-id attribute of the clicked element
+        var bookStatus = $(e.relatedTarget).data('book-status');
+
+        //populate the textbox
+        $(e.currentTarget).find('input[name="bookStatus"]').val(bookStatus);
+    });
+</script>
 
 <?php
 require 'includes/jobprovider_footer.php';

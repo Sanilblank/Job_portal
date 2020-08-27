@@ -383,3 +383,17 @@ if (isset($_GET['rejectid'])) {
         $errors['jobRejected'] = "Job post has been rejected";
     }
 }
+
+if (isset($_GET['jobreadid'])) {
+    $id = $_GET['jobreadid'];
+    $newfromadmin = 2;
+    $sql = "UPDATE jobs SET newfromadmin = ? WHERE id = ?";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header('Location: jobproviderMessages.php?error=sqlerror');
+        exit();
+    } else {
+        mysqli_stmt_bind_param($stmt, "si", $newfromadmin, $id);
+        mysqli_stmt_execute($stmt);
+    }
+}
