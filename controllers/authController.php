@@ -399,7 +399,7 @@ if (isset($_GET['jobreadid'])) {
 }
 
 if (isset($_POST['addseekerdata'])) {
-    $name = trim($_POST['name']);
+    $seekername = trim($_POST['seekername']);
     $address = trim($_POST['address']);
     $email = trim($_POST['email']);
     $username = trim($_POST['bookUsername']);
@@ -422,7 +422,6 @@ if (isset($_POST['addseekerdata'])) {
                 $newFileName = $username . "." . $fileExtension;
                 $fileDestination = "uploads/" . $newFileName;
                 move_uploaded_file($tmp_name, $fileDestination);
-                header("Location: jobseekerDashboard.php?uploadedsuccess");
             } else {
                 $errors['filetoobig'] = "Sorry, file size is to big.";
             }
@@ -431,5 +430,16 @@ if (isset($_POST['addseekerdata'])) {
         }
     } else {
         $errors['wrongfile'] = "Sorry, file type not supported";
+    }
+
+    $sql = "INSERT INTO seekerdetails (username, name, cv, address, email) VALUES (?, ?, ?, ?, ?)";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("Location: jobseekerDashboard.php?error=sqlerror");
+        exit();
+    } else {
+        mysqli_stmt_bind_param($stmt, "sssss", $username, $seekername, $fileDestination, $address, $email);
+        mysqli_stmt_execute($stmt);
+        $success['seekeradded'] = "Your information has been added successfully.";
     }
 }

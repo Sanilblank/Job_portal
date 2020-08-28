@@ -61,8 +61,8 @@ require 'controllers/authController.php';
 
                                         <form action="jobseekerDashboard.php" method="POST" enctype="multipart/form-data">
                                             <div class="form-group">
-                                                <label for="name">Name</label>
-                                                <input type="text" name="name" class="form-control form-control-lg" placeholder="Write your Name" required>
+                                                <label for="seekername">Name</label>
+                                                <input type="text" name="seekername" class="form-control form-control-lg" placeholder="Write your Name" required>
                                             </div>
                                             <div class="form-group">
                                                 <label for="address">Address</label>
