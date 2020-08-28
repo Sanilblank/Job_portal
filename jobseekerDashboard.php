@@ -21,6 +21,7 @@ require 'controllers/authController.php';
 
             <div class="col-md-11 offset-md-4 divTable" style="top: 50px; padding-top: 50px; padding-bottom: 50px;">
                 <h2 style="text-align: center; margin-bottom: 30px;">It seems you have not updated your profile yet.</h2>
+
                 <!-- Link trigger modal -->
                 <h3 style="text-align: center;"><a href="#addseekerdataModal" data-toggle="modal" data-target="#addseekerdataModal" data-book-username="<?php echo $username; ?>">Click here</a> to update it.</h3>
 
@@ -38,7 +39,7 @@ require 'controllers/authController.php';
                             </div>
                             <div class="modal-body">
 
-                                <form action="jobseekerDashboard.php" method="POST">
+                                <form action="jobseekerDashboard.php" method="POST" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label for="name">Name</label>
                                         <input type="text" name="name" class="form-control form-control-lg" placeholder="Write your Name" required>
@@ -51,11 +52,16 @@ require 'controllers/authController.php';
                                         <label for="email">Email</label>
                                         <input type="email" name="email" class="form-control form-control-lg" placeholder="Write your Email" required>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="file">Upload your CV here</label>
+                                        <input type="file" name="file" class="form-control form-control-lg" style="border: none; box-shadow:none;" required>
+                                    </div>
                                     <input type="hidden" name="bookUsername" value="">
                                     <hr>
                                     <div class="form-group">
                                         <button type="submit" name="addseekerdata" class="btn btn-primary btn-block btn-lg">Confirm</button>
                                     </div>
+
                                 </form>
                             </div>
 

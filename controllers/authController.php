@@ -397,3 +397,39 @@ if (isset($_GET['jobreadid'])) {
         mysqli_stmt_execute($stmt);
     }
 }
+
+if (isset($_POST['addseekerdata'])) {
+    $name = trim($_POST['name']);
+    $address = trim($_POST['address']);
+    $email = trim($_POST['email']);
+    $username = trim($_POST['bookUsername']);
+
+
+    $file = $_FILES['file'];
+    $name = $_FILES['file']['name'];
+    $tmp_name = $_FILES['file']['tmp_name'];
+    $size = $_FILES['file']['size'];
+    $error = $_FILES['file']['error'];
+
+    $tempExtension = explode('.', $name);
+    $fileExtension = strtolower(end($tempExtension));
+
+    $isAllowed = array('jpg', 'jpeg', 'png', 'pdf');
+
+    if (in_array($fileExtension, $isAllowed)) {
+        if ($error === 0) {
+            if ($size < 100000000000) {
+                $newFileName = $username . "." . $fileExtension;
+                $fileDestination = "uploads/" . $newFileName;
+                move_uploaded_file($tmp_name, $fileDestination);
+                header("Location: jobseekerDashboard.php?uploadedsuccess");
+            } else {
+                echo "Sorry, file size is to big.";
+            }
+        } else {
+            echo "Sorry, an error occured. Please try again.";
+        }
+    } else {
+        echo "Sorry, file type not supported.";
+    }
+}
