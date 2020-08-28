@@ -424,12 +424,12 @@ if (isset($_POST['addseekerdata'])) {
                 move_uploaded_file($tmp_name, $fileDestination);
                 header("Location: jobseekerDashboard.php?uploadedsuccess");
             } else {
-                echo "Sorry, file size is to big.";
+                $errors['filetoobig'] = "Sorry, file size is to big.";
             }
         } else {
-            echo "Sorry, an error occured. Please try again.";
+            $errors['erroroccur'] =  "Sorry, an error occured. Please try again.";
         }
     } else {
-        echo "Sorry, file type not supported.";
+        $errors['wrongfile'] = "Sorry, file type not supported";
     }
 }
