@@ -35,7 +35,7 @@ $i = 1;
                 </label>
                 <div class="messages">
                     <h2 class="h2heading">Messages from Admin will appear here</h2>
-                    <div class="col-md-11 offset-md-4 messageTable1" style="background: white;">
+                    <div class="col-md-12 offset-md-4 messageTable1" style="background: none; border: none;">
 
                         <?php
                         //For new messages from admin
@@ -71,20 +71,20 @@ $i = 1;
                                 }
 
                             ?>
-                                <table class="table" style="border-radius: 20px; overflow:hidden;">
+                                <table class="table" style="border-radius: 5px; overflow:hidden; margin-top: -20px; width:100%;">
                                     <tbody>
                                         <?php
                                         while ($user = mysqli_fetch_assoc($result)) {
                                             if ($user['newfromadmin'] == 1) { ?>
                                                 <tr class='clickable-row' data-href='jobproviderMessagesDisplay.php?readjobstatus=<?php echo $user['status']; ?>&&readjobid=<?php echo $user['id']; ?>'>
 
-                                                    <td style="width: 35%; font-size: 23px; border-bottom: 1px solid; text-align: left; padding: 20px 20px; background: rgb(185, 181, 181);">Admin <button class="btn btn-danger" style="border-radius: 15px; width: 60px; padding: 0;">New</button></td>
+                                                    <td style="width: 35%; font-size: 23px; text-align: left; padding: 20px 20px; background: rgb(185, 181, 181);">Admin <button class="btn btn-danger" style="border-radius: 15px; width: 60px; padding: 0;">New</button></td>
                                                     <?php
                                                     if ($user['status'] == "Approved") { ?>
-                                                        <td style="font-size: 23px; border-bottom: 1px solid; text-align: left; padding: 20px 20px; background: rgb(185, 181, 181);">Your job post has been approved.</td>
+                                                        <td style="font-size: 23px; text-align: left; padding: 20px 20px; background: rgb(185, 181, 181);">Your job post has been approved.</td>
 
                                                     <?php  } else { ?>
-                                                        <td style="font-size: 23px; border-bottom: 1px solid; text-align: left; padding: 20px 20px; background: rgb(185, 181, 181);">Your job post has been rejected.</td>
+                                                        <td style="font-size: 23px; text-align: left; padding: 20px 20px; background: rgb(185, 181, 181);">Your job post has been rejected.</td>
 
 
                                                     <?php }
@@ -95,13 +95,13 @@ $i = 1;
 
                                                 <tr class='clickable-row' data-href='jobproviderMessagesDisplay.php?readjobstatus=<?php echo $user['status']; ?>&&readjobid=<?php echo $user['id']; ?>'>
 
-                                                    <td style="width: 35%; font-size: 23px; border-bottom: 1px solid; text-align: left; padding: 20px 20px; background: whitesmoke;">Admin</td>
+                                                    <td style="width: 35%; font-size: 23px; text-align: left; padding: 20px 20px; background: whitesmoke;">Admin</td>
                                                     <?php
                                                     if ($user['status'] == "Approved") { ?>
-                                                        <td style="font-size: 23px; border-bottom: 1px solid; text-align: left; padding: 20px 20px; background: whitesmoke;">Your job post has been approved.</td>
+                                                        <td style="font-size: 23px; text-align: left; padding: 20px 20px; background: whitesmoke;">Your job post has been approved.</td>
 
                                                     <?php  } else { ?>
-                                                        <td style="font-size: 23px; border-bottom: 1px solid; text-align: left; padding: 20px 20px; background: whitesmoke;">Your job post has been rejected.</td>
+                                                        <td style="font-size: 23px; text-align: left; padding: 20px 20px; background: whitesmoke;">Your job post has been rejected.</td>
 
 
                                                     <?php }
