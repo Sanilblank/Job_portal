@@ -21,8 +21,47 @@ require 'controllers/authController.php';
 
             <div class="col-md-11 offset-md-4 divTable" style="top: 50px; padding-top: 50px; padding-bottom: 50px;">
                 <h2 style="text-align: center; margin-bottom: 30px;">It seems you have not updated your profile yet.</h2>
+                <!-- Link trigger modal -->
+                <h3 style="text-align: center;"><a href="#addseekerdataModal" data-toggle="modal" data-target="#addseekerdataModal" data-book-username="<?php echo $username; ?>">Click here</a> to update it.</h3>
 
-                <h3 style="text-align: center;"><a href="jobseekerProfile.php">Click here</a> to update it.</h3>
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="addseekerdataModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="exampleModalLabel">Profile Details</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <form action="jobseekerDashboard.php" method="POST">
+                                    <div class="form-group">
+                                        <label for="name">Name</label>
+                                        <input type="text" name="name" class="form-control form-control-lg" placeholder="Write your Name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="address">Address</label>
+                                        <input type="text" name="address" class="form-control form-control-lg" placeholder="Write your Address" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" name="email" class="form-control form-control-lg" placeholder="Write your Email" required>
+                                    </div>
+                                    <input type="hidden" name="bookUsername" value="">
+                                    <hr>
+                                    <div class="form-group">
+                                        <button type="submit" name="addseekerdata" class="btn btn-primary btn-block btn-lg">Confirm</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
 
             </div>
 
@@ -31,9 +70,6 @@ require 'controllers/authController.php';
         }
     }
     ?>
-
-
-
     </div>
     </div>
 
@@ -42,6 +78,16 @@ require 'controllers/authController.php';
 
 </section>
 
+<script>
+    $('#addseekerdataModal').on('show.bs.modal', function(e) {
+
+        //get data-id attribute of the clicked element
+        var bookUsername = $(e.relatedTarget).data('book-username');
+
+        //populate the textbox
+        $(e.currentTarget).find('input[name="bookUsername"]').val(bookUsername);
+    });
+</script>
 
 
 <?php
