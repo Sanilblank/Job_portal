@@ -93,7 +93,7 @@ $i = 1;
                     mysqli_stmt_execute($stmt);
                     mysqli_stmt_store_result($stmt);
                     $rowCount = mysqli_stmt_num_rows($stmt);
-                    $result = mysqli_stmt_get_result($stmt);
+
                     if ($rowCount == 0) { ?>
                         <div class="col-md-11 offset-md-4 divTable">
                             <h2 class="nodataheading">No jobs have been added by you.</h2>
