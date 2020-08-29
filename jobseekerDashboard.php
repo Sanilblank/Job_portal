@@ -3,7 +3,9 @@ require 'includes/jobseeker_header.php';
 require 'controllers/authController.php';
 ?>
 
-
+<?php
+$i = 1;
+?>
 <section>
     <div class="container">
         <div class="row">
@@ -26,6 +28,7 @@ require 'controllers/authController.php';
                 <?php } ?>
             </div>
             <?php
+            //Check if account is created or not
             $username = $_SESSION['username'];
             $sql = "SELECT * FROM seekerdetails WHERE username = ? LIMIT 1";
             $stmt = mysqli_stmt_init($conn);
@@ -92,7 +95,78 @@ require 'controllers/authController.php';
                     </div>
 
 
-            <?php } else {
+                    <?php } else {
+                    $status = "Approved";
+                    $sql = "SELECT * FROM jobs WHERE status = ?";
+                    $stmt = mysqli_stmt_init($conn);
+                    if (!mysqli_stmt_prepare($stmt, $sql)) {
+                        header('Location: jobseekerDashboard.php?error=sqlerror');
+                        exit();
+                    } else {
+                        mysqli_stmt_bind_param($stmt, "s", $status);
+                        mysqli_stmt_execute($stmt);
+                        mysqli_stmt_store_result($stmt);
+                        $rowCount = mysqli_stmt_num_rows($stmt);
+
+                        if ($rowCount == 0) { ?>
+                            <div class="col-md-11 offset-md-4 divTable">
+                                <h2 class="nodataheading">No new jobs have been added yet</h2>
+                                <h3 class="nodataheading">Please wait for new job posts.</h3>
+                            </div>
+                            <?php } else {
+                            $sql = "SELECT * FROM jobs WHERE status = ?";
+                            $stmt = mysqli_stmt_init($conn);
+                            if (!mysqli_stmt_prepare($stmt, $sql)) {
+                                header('Location: jobseekerDashboard.php?error=sqlerror');
+                                exit();
+                            } else {
+                                mysqli_stmt_bind_param($stmt, "s", $status);
+                                mysqli_stmt_execute($stmt);
+                                $result = mysqli_stmt_get_result($stmt); ?>
+                                <div class="col-md-11 offset-md-4 heading">
+                                    <h2 class="h2heading">Table containing all jobs posted by Seekers</h2>
+                                </div>
+
+                                <div class="col-md-11 offset-md-4 divTable">
+
+                                    <div class="container mb-3 mt-3">
+                                        <table class="table table-striped mydatatable" style="width: 100%">
+                                            <thead class="thead-dark" style="background: rgb(22, 22, 22); color:aliceblue;">
+                                                <tr>
+                                                    <td>S.N</td>
+                                                    <td>Job Title</td>
+                                                    <td>Recruiter</td>
+                                                    <td>Salary</td>
+                                                    <td>Email</td>
+                                                    <td>Location</td>
+                                                    <td></td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                while ($user = mysqli_fetch_assoc($result)) { ?>
+                                                    <tr>
+                                                        <td><?php echo $i;
+                                                            $i++;  ?></td>
+                                                        <td><?php echo $user['title']; ?></td>
+                                                        <td><?php echo $user['recruiter']; ?></td>
+                                                        <td><?php echo $user['salary']; ?></td>
+                                                        <td><?php echo $user['email']; ?></td>
+                                                        <td><?php echo $user['location']; ?></td>
+                                                        <td><button class="btn btn-primary">Apply</button> </td>
+                                                    </tr>
+
+
+                                                <?php }
+                                                ?>
+                                            </tbody>
+
+                                    </div>
+                                </div>
+
+            <?php }
+                        }
+                    }
                 }
             }
             ?>
@@ -104,6 +178,14 @@ require 'controllers/authController.php';
 
 
 </section>
+<script>
+    $('.mydatatable').DataTable({
+        "columnDefs": [{
+            "orderable": false,
+            "targets": 6
+        }]
+    });
+</script>
 
 <script>
     $('#addseekerdataModal').on('show.bs.modal', function(e) {

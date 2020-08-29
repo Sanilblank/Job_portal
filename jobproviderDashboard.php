@@ -123,7 +123,7 @@ $i = 1;
                                         <th>Status</th>
                                         <th>Salary</th>
                                         <th>Location</th>
-                                        <th class="no-sort"></th>
+                                        <th></th>
                                         <th></th>
 
 
