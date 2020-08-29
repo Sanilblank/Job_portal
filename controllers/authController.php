@@ -422,6 +422,17 @@ if (isset($_POST['addseekerdata'])) {
                 $newFileName = $username . "." . $fileExtension;
                 $fileDestination = "uploads/" . $newFileName;
                 move_uploaded_file($tmp_name, $fileDestination);
+
+                $sql = "INSERT INTO seekerdetails (username, name, cv, address, email) VALUES (?, ?, ?, ?, ?)";
+                $stmt = mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($stmt, $sql)) {
+                    header("Location: jobseekerDashboard.php?error=sqlerror");
+                    exit();
+                } else {
+                    mysqli_stmt_bind_param($stmt, "sssss", $username, $seekername, $fileDestination, $address, $email);
+                    mysqli_stmt_execute($stmt);
+                    $success['seekeradded'] = "Your information has been added successfully.";
+                }
             } else {
                 $errors['filetoobig'] = "Sorry, file size is to big.";
             }
@@ -431,15 +442,51 @@ if (isset($_POST['addseekerdata'])) {
     } else {
         $errors['wrongfile'] = "Sorry, file type not supported";
     }
+}
 
-    $sql = "INSERT INTO seekerdetails (username, name, cv, address, email) VALUES (?, ?, ?, ?, ?)";
-    $stmt = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("Location: jobseekerDashboard.php?error=sqlerror");
-        exit();
+
+if (isset($_POST['editseekerdata'])) {
+    $id = $_POST['bookId'];
+    $username = $_POST['bookUsername'];
+    $address = trim($_POST['bookAddress']);
+    $seekername = trim($_POST['bookName']);
+    $email = $_POST['bookEmail'];
+
+    $file = $_FILES['file'];
+    $name = $_FILES['file']['name'];
+    $tmp_name = $_FILES['file']['tmp_name'];
+    $size = $_FILES['file']['size'];
+    $error = $_FILES['file']['error'];
+
+    $tempExtension = explode('.', $name);
+    $fileExtension = strtolower(end($tempExtension));
+
+    $isAllowed = array('jpg', 'jpeg', 'png', 'pdf');
+
+    if (in_array($fileExtension, $isAllowed)) {
+        if ($error === 0) {
+            if ($size < 100000000000) {
+                $newFileName = $username . "." . $fileExtension;
+                $fileDestination = "uploads/" . $newFileName;
+                move_uploaded_file($tmp_name, $fileDestination);
+
+                $sql = "UPDATE seekerdetails SET name = ?, cv = ?, address = ?, email = ? WHERE id = ? && username = ?";
+                $stmt = mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($stmt, $sql)) {
+                    header("Location: jobseekerProfile.php?error=sqlerror");
+                    exit();
+                } else {
+                    mysqli_stmt_bind_param($stmt, "ssssis", $seekername, $fileDestination, $address, $email, $id, $username);
+                    mysqli_stmt_execute($stmt);
+                    $success['seekeradded'] = "Your information has been updated successfully.";
+                }
+            } else {
+                $errors['filetoobig'] = "Sorry, file size is to big.";
+            }
+        } else {
+            $errors['erroroccur'] =  "Sorry, an error occured. Please try again.";
+        }
     } else {
-        mysqli_stmt_bind_param($stmt, "sssss", $username, $seekername, $fileDestination, $address, $email);
-        mysqli_stmt_execute($stmt);
-        $success['seekeradded'] = "Your information has been added successfully.";
+        $errors['wrongfile'] = "Sorry, file type not supported";
     }
 }

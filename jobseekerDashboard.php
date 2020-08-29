@@ -17,7 +17,7 @@ require 'controllers/authController.php';
                     </div>
                 <?php } ?>
                 <?php if (count($success) > 0) { ?>
-                    <div class="alert alert-success">
+                    <div class="alert alert-success" style="left: 20px;">
                         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                         <?php foreach ($success as $success) { ?>
                             <?php echo $success  . "<br>" ?>
