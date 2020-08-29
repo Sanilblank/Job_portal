@@ -153,7 +153,30 @@ $i = 1;
                                                         <td><?php echo $user['salary']; ?></td>
                                                         <td><?php echo $user['email']; ?></td>
                                                         <td><?php echo $user['location']; ?></td>
-                                                        <td><button class="btn btn-primary">Apply</button> </td>
+                                                        <td>
+                                                            <?php
+                                                            //Already applied or left to apply
+                                                            $jobid = $user['id'];
+                                                            $username = $_SESSION['username'];
+                                                            $sql = "SELECT * FROM  applications WHERE jobid = ? && username = ?";
+                                                            $stmt = mysqli_stmt_init($conn);
+                                                            if (!mysqli_stmt_prepare($stmt, $sql)) {
+                                                                header('Location: jobseekerDashboard.php?error=sqlerror');
+                                                                exit();
+                                                            } else {
+                                                                mysqli_stmt_bind_param($stmt, "is", $jobid, $username);
+                                                                mysqli_stmt_execute($stmt);
+                                                                mysqli_stmt_store_result($stmt);
+                                                                $isApplied = mysqli_stmt_num_rows($stmt);
+                                                                if ($isApplied == 0) { ?>
+                                                                    <button class="btn btn-primary">Apply for job</button>
+                                                                <?php } else { ?>
+                                                                    <button class="btn btn-success">Already Applied</button>
+
+                                                            <?php }
+                                                            }
+                                                            ?>
+                                                        </td>
                                                     </tr>
 
 
