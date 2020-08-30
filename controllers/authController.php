@@ -348,6 +348,29 @@ if (isset($_GET['deletejob'])) {
 
         $success['deletedjob'] = "Job has been deleted successfully";
     }
+
+    $sql = "SELECT * FROM applications WHERE jobid = ?";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header('Location: jobproviderDashboard.php?error=sqlerror');
+        exit();
+    } else {
+        mysqli_stmt_bind_param($stmt, "i", $id);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_store_result($stmt);
+        $rows = mysqli_stmt_num_rows($stmt);
+        if ($rows != 0) {
+            $sql = "DELETE FROM applications WHERE jobid = ?";
+            $stmt = mysqli_stmt_init($conn);
+            if (!mysqli_stmt_prepare($stmt, $sql)) {
+                header('Location: jobproviderDashboard.php?error=sqlerror');
+                exit();
+            } else {
+                mysqli_stmt_bind_param($stmt, "i", $id);
+                mysqli_stmt_execute($stmt);
+            }
+        }
+    }
 }
 
 if (isset($_GET['approveid'])) {
