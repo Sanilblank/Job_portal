@@ -490,3 +490,23 @@ if (isset($_POST['editseekerdata'])) {
         $errors['wrongfile'] = "Sorry, file type not supported";
     }
 }
+
+if (isset($_POST['applyforjob'])) {
+    $appliedUsername = $_POST['bookJobUsername'];
+    $appliedJobId = $_POST['bookJobId'];
+    $selected = "Pending";
+    $newfromseeker = 1;
+    $newfromprovider = 0;
+    $message = "0";
+
+    $sql = "INSERT INTO applications (jobid, username, selected, newfromseeker, newfromprovider, message) VALUES (?, ?, ?, ?, ?, ?)";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("Location: jobseekerDashboard.php?error=sqlerror");
+        exit();
+    } else {
+        mysqli_stmt_bind_param($stmt, "issiis", $appliedJobId, $appliedUsername, $selected, $newfromseeker, $newfromprovider, $message);
+        mysqli_stmt_execute($stmt);
+        $success['appliedforjob'] = "You have successfully applied for the job.";
+    }
+}

@@ -124,7 +124,7 @@ $i = 1;
                                 mysqli_stmt_execute($stmt);
                                 $result = mysqli_stmt_get_result($stmt); ?>
                                 <div class="col-md-11 offset-md-4 heading">
-                                    <h2 class="h2heading">Table containing all jobs posted by Seekers</h2>
+                                    <h2 class="h2heading">Table containing all jobs posted by Providers</h2>
                                 </div>
 
                                 <div class="col-md-11 offset-md-4 divTable">
@@ -169,9 +169,38 @@ $i = 1;
                                                                 mysqli_stmt_store_result($stmt);
                                                                 $isApplied = mysqli_stmt_num_rows($stmt);
                                                                 if ($isApplied == 0) { ?>
-                                                                    <button class="btn btn-primary">Apply for job</button>
+                                                                    <!-- Modal button -->
+                                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#applyforjobModal" data-book-jobid="<?php echo $jobid; ?>" data-book-jobusername="<?php echo $_SESSION['username']; ?>">
+                                                                        Apply for Job
+                                                                    </button>
+                                                                    <!-- Modal -->
+                                                                    <div class="modal fade" id="applyforjobModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                        <div class="modal-dialog">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h4 class="modal-title" id="exampleModalLabel">Apply for Job</h4>
+                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                    </button>
+                                                                                </div>
+                                                                                <form action="jobseekerDashboard.php" method="POST">
+                                                                                    <div class="modal-body">
+                                                                                        <h3>Are you sure you want to apply for the job?</h3>
+                                                                                        <input type="hidden" name="bookJobId" value="">
+                                                                                        <input type="hidden" name="bookJobUsername" value="">
+                                                                                    </div>
+                                                                                    <div class="modal-footer">
+                                                                                        <button type="submit" class="btn btn-primary" name="applyforjob">Apply</button>
+                                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
                                                                 <?php } else { ?>
-                                                                    <button class="btn btn-success">Already Applied</button>
+                                                                    <button class="btn btn-success" style="width: 115px;">Applied</button>
 
                                                             <?php }
                                                             }
@@ -220,6 +249,20 @@ $i = 1;
         $(e.currentTarget).find('input[name="bookUsername"]').val(bookUsername);
     });
 </script>
+
+<script>
+    $('#applyforjobModal').on('show.bs.modal', function(e) {
+
+        //get data-id attribute of the clicked element
+        var bookJobId = $(e.relatedTarget).data('book-jobid');
+        var bookJobUsername = $(e.relatedTarget).data('book-jobusername');
+
+        //populate the textbox
+        $(e.currentTarget).find('input[name="bookJobId"]').val(bookJobId);
+        $(e.currentTarget).find('input[name="bookJobUsername"]').val(bookJobUsername);
+    });
+</script>
+
 
 
 <?php
