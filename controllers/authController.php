@@ -533,3 +533,43 @@ if (isset($_POST['applyforjob'])) {
         $success['appliedforjob'] = "You have successfully applied for the job.";
     }
 }
+
+if (isset($_POST['approvejobseeker'])) {
+    $username = $_POST['bookAppliedUsername'];
+    $jobid = $_POST['bookJobId'];
+    $message = $_POST['message'];
+    $newfromseeker = 2;
+    $newfromprovider = 1;
+    $selected = "Approved";
+
+    $sql = "UPDATE applications SET selected = ?, newfromseeker = ?, newfromprovider = ?, message = ? WHERE username = ? && jobid = ?";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header('applicationDetails.php');
+        exit();
+    } else {
+        mysqli_stmt_bind_param($stmt, "siissi", $selected, $newfromseeker, $newfromprovider, $message, $username, $jobid);
+        mysqli_stmt_execute($stmt);
+        $success['approved'] = "Application approved successfully";
+    }
+}
+
+if (isset($_POST['rejectjobseeker'])) {
+    $username = $_POST['bookAppliedUsername'];
+    $jobid = $_POST['bookJobId'];
+    $message = $_POST['message'];
+    $newfromseeker = 2;
+    $newfromprovider = 1;
+    $selected = "Rejected";
+
+    $sql = "UPDATE applications SET selected = ?, newfromseeker = ?, newfromprovider = ?, message = ? WHERE username = ? && jobid = ?";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header('applicationDetails.php');
+        exit();
+    } else {
+        mysqli_stmt_bind_param($stmt, "siissi", $selected, $newfromseeker, $newfromprovider, $message, $username, $jobid);
+        mysqli_stmt_execute($stmt);
+        $errors['rejected'] = "Application has been rejected";
+    }
+}

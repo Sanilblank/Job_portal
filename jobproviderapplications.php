@@ -15,6 +15,24 @@ require 'controllers/authController.php';
 
     <div class="container">
         <div class="row">
+            <div class="col-md-11 offset-md-4 heading">
+                <?php if (count($errors) > 0) { ?>
+                    <div class="alert alert-danger" style="left: 20px;">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                        <?php foreach ($errors as $error) { ?>
+                            <?php echo $error  . "<br>" ?>
+                        <?php } ?>
+                    </div>
+                <?php } ?>
+                <?php if (count($success) > 0) { ?>
+                    <div class="alert alert-success" style="left: 20px;">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                        <?php foreach ($success as $success) { ?>
+                            <?php echo $success  . "<br>" ?>
+                        <?php } ?>
+                    </div>
+                <?php } ?>
+            </div>
 
             <?php
             $sql = "SELECT * FROM applications WHERE jobid = ?";
@@ -41,16 +59,20 @@ require 'controllers/authController.php';
                         mysqli_stmt_bind_param($stmt, "i", $jobid);
                         mysqli_stmt_execute($stmt);
                         $result = mysqli_stmt_get_result($stmt); ?>
+                        <div class="col-md-11 offset-md-4 heading">
+                            <h2 class="h2heading">Users who applied for the job are shown below</h2>
+                        </div>
 
                         <div class="col-md-11 offset-md-4 divTable">
                             <div class="container mb-3 mt-3">
-                                <table class="table table-striped table-bordered">
+                                <table class="table table-striped mydatatable">
                                     <thead style="background: rgb(52, 58, 64); color:honeydew;">
                                         <tr>
-                                            <td style="width:60px;">S.N</td>
+                                            <td>S.N</td>
                                             <td>Username</td>
                                             <td>Status</td>
-                                            <td style="width: 150px;"></td>
+                                            <td></td>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -91,6 +113,9 @@ require 'controllers/authController.php';
         </div>
     </div>
 </section>
+<script>
+    $('.mydatatable').DataTable({});
+</script>
 
 
 <?php
