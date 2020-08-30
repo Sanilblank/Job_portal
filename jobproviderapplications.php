@@ -73,7 +73,7 @@ require 'controllers/authController.php';
                                                     ?>
                                                 </td>
                                                 <td>
-                                                    <button type="button" class="btn btn-primary">Details</button>
+                                                    <a href="applicationDetails.php?job_id=<?php echo $user['jobid']; ?>&&applied_username=<?php echo $user['username']; ?>" class="btn btn-primary">Details</a>
                                                 </td>
                                             </tr>
                                         <?php }
