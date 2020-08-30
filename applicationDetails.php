@@ -36,7 +36,7 @@ require 'controllers/authController.php';
                 <hr>
                 <h3 style="margin-bottom: 25px;">Email:&nbsp;&emsp;&nbsp; <?php echo $seeker['email']; ?></h3>
                 <hr>
-                <a href="uploads/Sabita.pdf" download>
+                <a href="<?php echo $seeker['cv']; ?>" download>
                     <p style="font-size: 22px; margin-top:25px; margin-bottom:25px;"><i class="far fa-file-pdf"> Click to download CV </i></p>
                 </a>
                 <hr>
