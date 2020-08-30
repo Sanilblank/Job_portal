@@ -256,7 +256,8 @@ label #cancelOGa {
 }
 
 #checkOGa:checked ~ .messages {
-  margin-left: -50000px;
+  margin-left: -1000px;
+  position: fixed;
 }
 
 #checkOGa:checked ~ .messages2{

@@ -71,7 +71,7 @@ $i = 1;
                                 }
 
                             ?>
-                                <table class="table" style="border-radius: 5px; overflow:hidden; margin-top: -20px; width:100%;">
+                                <table class="table" style="border-radius: 5px; overflow:hidden; margin-top: -20px;">
                                     <tbody>
                                         <?php
                                         while ($user = mysqli_fetch_assoc($result)) {
