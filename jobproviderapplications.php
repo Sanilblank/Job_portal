@@ -1,0 +1,98 @@
+<?php
+require 'includes/jobprovider_header.php';
+require 'controllers/authController.php';
+?>
+<section>
+    <?php
+    if (isset($_GET['job_id'])) {
+        $jobid = $_GET['job_id'];
+    }
+    ?>
+
+    <?php
+    $i = 1;
+    ?>
+
+    <div class="container">
+        <div class="row">
+
+            <?php
+            $sql = "SELECT * FROM applications WHERE jobid = ?";
+            $stmt = mysqli_stmt_init($conn);
+            if (!mysqli_stmt_prepare($stmt, $sql)) {
+                header('Location: jobproviderapplications.php?error=sqlerror');
+                exit();
+            } else {
+                mysqli_stmt_bind_param($stmt, "i", $jobid);
+                mysqli_stmt_execute($stmt);
+                mysqli_stmt_store_result($stmt);
+                $numrows = mysqli_stmt_num_rows($stmt);
+                if ($numrows == 0) { ?>
+                    <div class="col-md-11 offset-md-4 divTable">
+                        <h2 class="h2heading" style="color: black; margin-top:60px; margin-bottom:60px;">No one has applied for the job yet</h2>
+                    </div>
+                    <?php } else {
+                    $sql = "SELECT * FROM applications WHERE jobid = ?";
+                    $stmt = mysqli_stmt_init($conn);
+                    if (!mysqli_stmt_prepare($stmt, $sql)) {
+                        header('Location: jobproviderapplications.php?error=sqlerror');
+                        exit();
+                    } else {
+                        mysqli_stmt_bind_param($stmt, "i", $jobid);
+                        mysqli_stmt_execute($stmt);
+                        $result = mysqli_stmt_get_result($stmt); ?>
+
+                        <div class="col-md-11 offset-md-4 divTable">
+                            <div class="container mb-3 mt-3">
+                                <table class="table table-striped table-bordered">
+                                    <thead style="background: rgb(52, 58, 64); color:honeydew;">
+                                        <tr>
+                                            <td style="width:60px;">S.N</td>
+                                            <td>Username</td>
+                                            <td>Status</td>
+                                            <td style="width: 150px;"></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        while ($user = mysqli_fetch_assoc($result)) { ?>
+                                            <tr>
+                                                <td><?php echo $i;
+                                                    $i++; ?></td>
+                                                <td><?php echo $user['username']; ?></td>
+                                                <td>
+                                                    <?php
+
+                                                    if ($user['selected'] == "Pending") { ?>
+                                                        <button type="button" class="btn btn-warning" style="width: 90px;">Pending</button>
+                                                    <?php } elseif ($user['selected'] == "Approved") { ?>
+                                                        <button type="button" class="btn btn-success" style="width: 90px;">Approved</button>
+                                                    <?php } else { ?>
+                                                        <button type="button" class="btn btn-danger" style="width: 90px;">Rejected</button>
+                                                    <?php  }
+                                                    ?>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary">Details</button>
+                                                </td>
+                                            </tr>
+                                        <?php }
+                                        ?>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+
+            <?php }
+                }
+            }
+            ?>
+        </div>
+    </div>
+</section>
+
+
+<?php
+require 'includes/jobprovider_footer.php';
+?>

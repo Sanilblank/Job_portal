@@ -131,7 +131,7 @@ $i = 1;
 
                                     <div class="container mb-3 mt-3">
                                         <table class="table table-striped mydatatable" style="width: 100%">
-                                            <thead class="thead-dark" style="background: rgb(22, 22, 22); color:aliceblue;">
+                                            <thead class="thead-dark" style="background: rgb(52, 58, 64); color:aliceblue;">
                                                 <tr>
                                                     <td>S.N</td>
                                                     <td>Job Title</td>

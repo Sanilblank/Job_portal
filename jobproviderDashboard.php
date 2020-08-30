@@ -152,7 +152,7 @@ $i = 1;
                                             <td><?php echo $user['salary']; ?></td>
                                             <td><?php echo $user['location']; ?></td>
                                             <td>
-                                                <a href="applications.php?job_id=<?php echo $user['id']; ?>" class="btn btn-info">Applications</a>
+                                                <a href="jobproviderapplications.php?job_id=<?php echo $user['id']; ?>" class="btn btn-info">Applications</a>
                                             </td>
                                             <!-- Button trigger modal -->
                                             <td>
