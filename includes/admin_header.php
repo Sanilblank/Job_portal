@@ -38,3 +38,14 @@
 
         </ul>
     </div>
+    <?php
+    if (!isset($_SESSION['user'])) {
+        header('Location: login.php');
+        exit();
+    } else {
+        if ($_SESSION['user'] != "admin") {
+            header('Location: login.php');
+            exit();
+        }
+    }
+    ?>
