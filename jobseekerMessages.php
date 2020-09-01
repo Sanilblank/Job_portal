@@ -12,14 +12,15 @@ require 'controllers/authController.php';
                 <div class="col-md-11 offset-md-4 messageTable1" style="background: none; border: none;">
                     <?php
                     //To see if any messages present
+                    $username = $_SESSION['username'];
                     $newfromprovider = 0;
-                    $sql = "SELECT * FROM applications WHERE newfromprovider <> ?";
+                    $sql = "SELECT * FROM applications WHERE username = ? && newfromprovider <> ?";
                     $stmt = mysqli_stmt_init($conn);
                     if (!mysqli_stmt_prepare($stmt, $sql)) {
                         header('jobseekerMessages.php?error=sqlerror');
                         exit();
                     } else {
-                        mysqli_stmt_bind_param($stmt, "i", $newfromprovider);
+                        mysqli_stmt_bind_param($stmt, "si", $username, $newfromprovider);
                         mysqli_stmt_execute($stmt);
                         mysqli_stmt_store_result($stmt);
                         $rows = mysqli_stmt_num_rows($stmt);
@@ -30,13 +31,13 @@ require 'controllers/authController.php';
                             </div>
 
                         <?php } else {
-                            $sql = "SELECT * FROM applications WHERE newfromprovider <> ? ORDER BY id desc";
+                            $sql = "SELECT * FROM applications WHERE username = ? && newfromprovider <> ? ORDER BY id desc";
                             $stmt = mysqli_stmt_init($conn);
                             if (!mysqli_stmt_prepare($stmt, $sql)) {
                                 header('Location: jobseekerMessages.php?error=sqlerror');
                                 exit();
                             } else {
-                                mysqli_stmt_bind_param($stmt, "i", $newfromprovider);
+                                mysqli_stmt_bind_param($stmt, "si", $username, $newfromprovider);
                                 mysqli_stmt_execute($stmt);
                                 $result = mysqli_stmt_get_result($stmt);
                             }
@@ -59,7 +60,7 @@ require 'controllers/authController.php';
                                                 $job = mysqli_fetch_assoc($resultjob);
 
                                                 if ($usermessage['newfromprovider'] == 1) { ?>
-                                                    <tr class='clickable-row' data-href='#'>
+                                                    <tr class='clickable-row' data-href='jobseekerMessagesDisplay.php?job_id=<?php echo $usermessage['jobid']; ?>&&status=<?php echo $usermessage['selected']; ?>'>
 
                                                         <td style="width: 35%; font-size: 23px; text-align: left; padding: 20px 20px; background: rgb(185, 181, 181);"><?php echo $job['recruiter']; ?> <button class="btn btn-danger" style="border-radius: 15px; width: 60px; padding: 0;">New</button></td>
                                                         <td style="font-size: 23px; text-align: left; padding: 20px 20px; background: rgb(185, 181, 181);">Reply for your application for post of <?php echo $job['title']; ?></td>
@@ -67,7 +68,7 @@ require 'controllers/authController.php';
 
                                                 <?php } else { ?>
 
-                                                    <tr class='clickable-row' data-href='#'>
+                                                    <tr class='clickable-row' data-href='jobseekerMessagesDisplay.php?job_id=<?php echo $usermessage['jobid']; ?>&&status=<?php echo $usermessage['selected']; ?>'>
 
                                                         <td style="width: 35%; font-size: 23px; text-align: left; padding: 20px 20px; background: whitesmoke;"><?php echo $job['recruiter']; ?></td>
                                                         <td style="font-size: 23px; text-align: left; padding: 20px 20px; background: whitesmoke;">Reply for your application for post of <?php echo $job['title']; ?></td>

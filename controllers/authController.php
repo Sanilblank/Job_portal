@@ -573,3 +573,18 @@ if (isset($_POST['rejectjobseeker'])) {
         $errors['rejected'] = "Application has been rejected";
     }
 }
+
+if (isset($_POST['jobseekermessageread'])) {
+    $jobid = $_POST['readseekerjobid'];
+    $username = $_POST['readseekerusername'];
+    $newfromprovider = 2;
+    $sql = "UPDATE applications SET newfromprovider = ? WHERE jobid = ? && username = ?";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header('Location: jobseekerMessagesDisplay?error=sqlerror');
+        exit();
+    } else {
+        mysqli_stmt_bind_param($stmt, "sis", $newfromprovider, $jobid, $username);
+        mysqli_stmt_execute($stmt);
+    }
+}
