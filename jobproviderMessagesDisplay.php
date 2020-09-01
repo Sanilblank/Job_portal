@@ -3,20 +3,6 @@ require_once 'controllers/authController.php';
 require_once 'includes/jobprovider_header.php';
 ?>
 
-
-
-
-<?php
-if (!isset($_SESSION['accountType'])) {
-    header('Location: login.php');
-    exit();
-} else {
-    if ($_SESSION['accountType'] == "seeker") {
-        header('Location: login.php');
-        exit();
-    }
-}
-?>
 <?php
 if (isset($_GET['readjobstatus'])) {
     $status = $_GET['readjobstatus'];

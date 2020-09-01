@@ -40,3 +40,15 @@
 
         </ul>
     </div>
+
+    <?php
+    if (!isset($_SESSION['accountType'])) {
+        header('Location: login.php');
+        exit();
+    } else {
+        if ($_SESSION['accountType'] == "provider") {
+            header('Location: login.php');
+            exit();
+        }
+    }
+    ?>

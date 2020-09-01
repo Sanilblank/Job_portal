@@ -4,17 +4,6 @@ require 'controllers/authController.php';
 ?>
 
 <?php
-if (!isset($_SESSION['accountType'])) {
-    header('Location: login.php');
-    exit();
-} else {
-    if ($_SESSION['accountType'] == "seeker") {
-        header('Location: login.php');
-        exit();
-    }
-}
-?>
-<?php
 $i = 1;
 ?>
 
