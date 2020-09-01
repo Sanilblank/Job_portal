@@ -1,29 +1,33 @@
 <?php
 require_once 'controllers/authController.php';
+require_once 'includes/jobprovider_header.php';
 ?>
 
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap 4 CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
-    <title>Message</title>
-</head>
 
-<body>
 
-    <?php
-    if (isset($_GET['readjobstatus'])) {
-        $status = $_GET['readjobstatus'];
-        $id = $_GET['readjobid'];
+<?php
+if (!isset($_SESSION['accountType'])) {
+    header('Location: login.php');
+    exit();
+} else {
+    if ($_SESSION['accountType'] == "seeker") {
+        header('Location: login.php');
+        exit();
     }
-    ?>
+}
+?>
+<?php
+if (isset($_GET['readjobstatus'])) {
+    $status = $_GET['readjobstatus'];
+    $id = $_GET['readjobid'];
+}
+?>
+<section>
     <div class="container">
         <div class="row">
-            <div class="col-md-6 offset-md-4 form-div" style="top: 100px;">
+            <div class="col-md-7 offset-md-4 divTable">
+
                 <form action="jobproviderMessages.php" method="GET">
                     <h2>Message from admin</h2>
                     <hr>
@@ -43,9 +47,12 @@ require_once 'controllers/authController.php';
                     <button type="submit" name="jobreadconfirm" class="btn btn-primary" style="margin-left: 250px;">Confirm</button>
                 </form>
 
+
             </div>
         </div>
     </div>
-</body>
+</section>
 
-</html>
+<?php
+require_once 'includes/jobprovider_footer.php';
+?>

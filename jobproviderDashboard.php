@@ -2,6 +2,18 @@
 require 'includes/jobprovider_header.php';
 require 'controllers/authController.php';
 ?>
+
+<?php
+if (!isset($_SESSION['accountType'])) {
+    header('Location: login.php');
+    exit();
+} else {
+    if ($_SESSION['accountType'] == "seeker") {
+        header('Location: login.php');
+        exit();
+    }
+}
+?>
 <?php
 $i = 1;
 ?>
@@ -95,7 +107,7 @@ $i = 1;
                     $rowCount = mysqli_stmt_num_rows($stmt);
 
                     if ($rowCount == 0) { ?>
-                        <div class="col-md-11 offset-md-4 divTable">
+                        <div class="col-md-11 offset-md-4 divTable" style="border:none;">
                             <h2 class="nodataheading">No jobs have been added by you.</h2>
                             <h3 class="nodataheading">Please add a new job title.</h3>
                         </div>
