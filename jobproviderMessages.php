@@ -35,7 +35,7 @@ $i = 1;
                 </label>
                 <div class="messages">
                     <h2 class="h2heading">Messages from Admin will appear here</h2>
-                    <div class="col-md-12 offset-md-4 messageTable1" style="background: none; border: none;">
+                    <div class="col-md-11 offset-md-4 messageTable1" style="background: none; border: none;">
 
                         <?php
                         //For new messages from admin
@@ -53,7 +53,7 @@ $i = 1;
                             mysqli_stmt_store_result($stmt);
                             $rowCount = mysqli_stmt_num_rows($stmt);
                             if ($rowCount == 0) { ?>
-                                <div class="col-md-11 offset-md-4" divTable>
+                                <div class="col-md-11 offset-md-4 divTable">
                                     <h2 class="nodataheading">No messages from admin yet.</h2>
 
                                 </div>
@@ -129,7 +129,80 @@ $i = 1;
 
                 <div class="messages2">
                     <h2 class="h2heading">Messages from Users will appear here</h2>
-                    <div class="col-md-11 offset-md-4 messageTable1">
+                    <div class="col-md-11 offset-md-4 messageTable1" style="background: none; border: none;">
+                        <?php
+                        //To see if any messages present
+                        $sql = "SELECT * FROM applications";
+                        $stmt = mysqli_stmt_init($conn);
+                        if (!mysqli_stmt_prepare($stmt, $sql)) {
+                            header('jobproviderMessages.php?error=sqlerror');
+                            exit();
+                        } else {
+                            mysqli_stmt_execute($stmt);
+                            mysqli_stmt_store_result($stmt);
+                            $rows = mysqli_stmt_num_rows($stmt);
+                            if ($rows == 0) { ?>
+                                <div class="col-md-11 offset-md-4 divTable">
+                                    <h2 class="nodataheading">No messages from users yet.</h2>
+
+                                </div>
+
+                            <?php } else {
+                                //For messages from users
+                                $sql = "SELECT * FROM applications ORDER BY id desc";
+                                $stmt = mysqli_stmt_init($conn);
+                                if (!mysqli_stmt_prepare($stmt, $sql)) {
+                                    header('Location: jobproviderMessages.php?error=sqlerror');
+                                    exit();
+                                } else {
+                                    mysqli_stmt_execute($stmt);
+                                    $result = mysqli_stmt_get_result($stmt);
+                                }
+                            ?>
+                                <table class="table" style="border-radius: 5px; overflow:hidden; margin-top: -20px;">
+                                    <tbody>
+                                        <?php
+                                        while ($usermessage = mysqli_fetch_assoc($result)) {
+
+                                            $sql = "SELECT * FROM jobs WHERE id=?";
+                                            $stmt = mysqli_stmt_init($conn);
+                                            if (!mysqli_stmt_prepare($stmt, $sql)) {
+                                                header('jobproviderMessages.php?error=sqlerror');
+                                                exit();
+                                            } else {
+                                                mysqli_stmt_bind_param($stmt, "i", $usermessage['jobid']);
+                                                mysqli_stmt_execute($stmt);
+                                                $resultjob = mysqli_stmt_get_result($stmt);
+                                                if ($resultjob) {
+                                                    $job = mysqli_fetch_assoc($resultjob);
+
+                                                    if ($usermessage['newfromseeker'] == 1) { ?>
+                                                        <tr class='clickable-row' data-href='applicationDetails.php?job_id=<?php echo $usermessage['jobid']; ?>&&applied_username=<?php echo $usermessage['username']; ?>'>
+
+                                                            <td style="width: 35%; font-size: 23px; text-align: left; padding: 20px 20px; background: rgb(185, 181, 181);"><?php echo $usermessage['username']; ?> <button class="btn btn-danger" style="border-radius: 15px; width: 60px; padding: 0;">New</button></td>
+                                                            <td style="font-size: 23px; text-align: left; padding: 20px 20px; background: rgb(185, 181, 181);">Application for post of <?php echo $job['title']; ?></td>
+                                                        </tr>
+
+                                                    <?php } else { ?>
+
+                                                        <tr class='clickable-row' data-href='applicationDetails.php?job_id=<?php echo $usermessage['jobid']; ?>&&applied_username=<?php echo $usermessage['username']; ?>'>
+
+                                                            <td style="width: 35%; font-size: 23px; text-align: left; padding: 20px 20px; background: whitesmoke;"><?php echo $usermessage['username']; ?></td>
+                                                            <td style="font-size: 23px; text-align: left; padding: 20px 20px; background: whitesmoke;">Application for post of <?php echo $job['title']; ?></td>
+                                                        </tr>
+
+                                <?php }
+                                                }
+                                            }
+                                        }
+                                    }
+                                } ?>
+
+
+
+
+                                    </tbody>
+                                </table>
 
 
 

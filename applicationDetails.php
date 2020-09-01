@@ -118,8 +118,6 @@ require 'controllers/authController.php';
                                 </div>
                             </div>
                         </div>
-                    <?php } else { ?>
-                        <a href="jobproviderapplications.php?job_id=<?php echo $jobid; ?>" class="btn btn-primary" style="font-size:20px; margin-left:250px; width:150px; margin-bottom:20px; margin-top:20px;">Confirm</a>
                 <?php }
                 }
 
