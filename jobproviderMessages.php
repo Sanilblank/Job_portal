@@ -115,14 +115,16 @@ $i = 1;
                                             ?>
 
 
-                                <?php }
-                                    }
-                                }
-                                ?>
-
+                                        <?php } ?>
 
                                     </tbody>
                                 </table>
+                        <?php  }
+                        }
+                        ?>
+
+
+
 
                     </div>
                 </div>
@@ -191,18 +193,20 @@ $i = 1;
                                                             <td style="font-size: 23px; text-align: left; padding: 20px 20px; background: whitesmoke;">Application for post of <?php echo $job['title']; ?></td>
                                                         </tr>
 
-                                <?php }
+                                        <?php }
                                                 }
                                             }
-                                        }
-                                    }
-                                } ?>
-
-
-
-
+                                        } ?>
                                     </tbody>
                                 </table>
+
+                        <?php }
+                        } ?>
+
+
+
+
+
 
 
 
@@ -225,16 +229,7 @@ $i = 1;
         });
     });
 </script>
-<script>
-    $('#newfromadmin1Modal').on('show.bs.modal', function(e) {
 
-        //get data-id attribute of the clicked element
-        var bookStatus = $(e.relatedTarget).data('book-status');
-
-        //populate the textbox
-        $(e.currentTarget).find('input[name="bookStatus"]').val(bookStatus);
-    });
-</script>
 
 <?php
 require 'includes/jobprovider_footer.php';
