@@ -20,7 +20,7 @@
 
     <header class="actualHeaderOG">
         <ul>
-            <li><a href="#">Logout</a></li>
+            <li><a href="login.php?logout=1">Logout</a></li>
         </ul>
     </header>
 
@@ -40,6 +40,7 @@
     </div>
 
     <?php
+    session_start();
     if (!isset($_SESSION['accountType'])) {
         header('Location: login.php');
         exit();

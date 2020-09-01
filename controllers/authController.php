@@ -124,7 +124,7 @@ if (isset($_POST['login-btn'])) {
         $errors['password'] = "Password required";
     }
     if ($username == "admin" && $password == "admin") {
-        $_SESSION['user'] == "Admin";
+        $_SESSION['user'] = "admin";
         header('Location: adminDashboard.php');
         exit();
     }

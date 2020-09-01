@@ -20,7 +20,7 @@
 
     <header class="actualHeaderOG">
         <ul>
-            <li><a href="#">Logout</a></li>
+            <li><a href="login.php?logout=1">Logout</a></li>
         </ul>
     </header>
 
@@ -39,13 +39,9 @@
         </ul>
     </div>
     <?php
+    session_start();
     if (!isset($_SESSION['user'])) {
-        header('Location: login.php');
+        header('Location:login.php');
         exit();
-    } else {
-        if ($_SESSION['user'] != "admin") {
-            header('Location: login.php');
-            exit();
-        }
     }
     ?>

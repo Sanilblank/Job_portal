@@ -3,7 +3,6 @@ require 'includes/admin_header.php';
 require 'controllers/authController.php';
 ?>
 
-
 <?php
 $verified = 1;
 //Retrieving total no of verified users from database
@@ -74,11 +73,6 @@ if (!mysqli_stmt_prepare($stmt, $sql)) {
     $resultRejected = mysqli_stmt_get_result($stmt);
     $userRejected = mysqli_num_rows($resultRejected);
 }
-
-
-
-
-
 
 ?>
 
