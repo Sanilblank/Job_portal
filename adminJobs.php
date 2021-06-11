@@ -45,7 +45,7 @@ $i = 1;
                     $rowCount = mysqli_stmt_num_rows($stmt);
                     $result = mysqli_stmt_get_result($stmt);
                     if ($rowCount == 0) { ?>
-                        <div class="col-md-11 offset-md-4" divTable>
+                        <div class="col-md-11 offset-md-4 divTable">
                             <h2 class="nodataheading">No jobs to approve. </h2>
                             <h3 class="nodataheading">Wait for job providers to add new jobs.</h3>
                         </div>
